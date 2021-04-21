@@ -1,0 +1,6 @@
+# Database Environment Variables
+POSTGRES_DB=weix_os
+POSTGRES_USER=kickass_ritchie
+POSTGRES_PASSWORD=
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
