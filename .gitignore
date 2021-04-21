@@ -37,5 +37,9 @@
 /weix_os_app/app/config/master.key
 
 # Ignore webpacker.
-/weix_os_app/app/node_modules/.cache/
-/weix_os_app/app/public/packs/
+/weix_os_app/app/node_modules/.cache/*
+/weix_os_app/app/public/packs/*
+
+/weix_os_app/app/node_modules/*
+
+/weix_os_app/app/public/assets/*

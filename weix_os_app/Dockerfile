@@ -10,11 +10,11 @@ WORKDIR /var/www
 RUN apk add --update --no-cache \
     build-base \
     bash \
-    git \
     openssh \
     postgresql-dev \
     tzdata \
     nodejs \
+    npm \
     yarn
 
 # Set an environment variables for rails
