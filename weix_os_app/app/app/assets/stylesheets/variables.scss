@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
+
+
+
+
+// -----------  colors  -----------
+
+
+// Global colors
+$black-background: #333;
+$red: #a73939;
+$orange-light: #e4c162;
+
+// grey and black
+$brown: #757763;
+$beige-dark: #5e5e5c;
+$beige-darker: #2b2b2a;
+$beige-black: #1b1b1a;
+$beige-pitch-black: #10100f;
+
+// light
+$beige-light: #D0D1CD;
+$beige-lighter: #EFF0EB;
+
+// Update Bulma's global variables
+$family-sans-serif: "Nunito", sans-serif;
+$grey-dark: $brown;
+$grey-light: $beige-light;
+$primary: $red;
+$link: $orange-light;
+
+$control-border-width: 2px;
+$input-background-color: $beige-lighter;
+$input-border-color: transparent;
+$input-shadow: none;
+
+
+
+
+
+
+// -----------  sizes  -----------
+
+$app-size: 60px;
+
+$system-toolbar-height: 42px;
+
+
+
+
+
+
+// Import the rest of Bulma
+@import "bulma";

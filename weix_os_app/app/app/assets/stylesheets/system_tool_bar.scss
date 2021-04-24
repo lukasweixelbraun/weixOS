@@ -1,0 +1,100 @@
+@import "variables";
+
+// --- system-tool-bar ---
+
+.system-tool-bar {
+  position: fixed;
+  background-color: $beige-darker;
+  height: $system-toolbar-height;
+  width: 100%;
+  bottom: 0px;
+}
+
+.system-tool-bar > div {
+  background-color: $beige-black;
+  height: $system-toolbar-height;
+}
+
+.system-tool-bar > div > button {
+  border-radius: 0px;
+  border: 0px;
+  height: $system-toolbar-height;
+  width: $system-toolbar-height;
+}
+
+.system-menue {
+  width: $system-toolbar-height;
+  float: left;
+}
+
+.system-pinned-applications {
+  border: 1px solid $beige-pitch-black;
+  -moz-box-shadow: inset 0 0 3px $beige-pitch-black;
+  -webkit-box-shadow: inset 0 0 3px $beige-pitch-black;
+  box-shadow: inset 0 0 3px $beige-pitch-black;
+  min-width: 200px;
+  float: left;
+  padding: 4px;
+}
+
+.system-information {
+  border: 1px solid $beige-pitch-black;
+  -moz-box-shadow: inset 0 0 3px $beige-pitch-black;
+  -webkit-box-shadow: inset 0 0 3px $beige-pitch-black;
+  box-shadow: inset 0 0 3px $beige-pitch-black;
+
+  min-width: 200px;
+  float: right;
+  padding: 8px;
+}
+
+// --- list of pinned applications ---
+
+.element {
+  height: 100%;
+  width: auto;
+  margin: 0px 8px;
+}
+
+.system-pinned-applications > .element {
+  float: left;
+  width: $system-toolbar-height - 10px;
+}
+
+.system-pinned-applications > .element > .app {
+  background-color: $beige-light;
+  border-radius: 6px;
+  box-shadow: 0 0 3px $beige-pitch-black;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+// --- right side of the system toolbar ---
+
+.system-information > .element {
+  float: right;
+  min-width: $system-toolbar-height - 18px;
+}
+
+.system-information > .element > .time {
+  color: $beige-light;
+  font-weight: 900;
+  display: inline-block;
+  width: 100%;
+}
+
+.system-information > .element > .info {
+  background-color: $beige-light;
+  border: 1px solid $beige-pitch-black;
+  width: 100%;
+  height: 100%;
+}
+
+.vr {
+  width: 1px; 
+  height: 100%;
+  border-left: 1px solid $beige-pitch-black;
+  float: right;
+  margin: 0px 8px;
+}

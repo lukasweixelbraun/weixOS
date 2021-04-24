@@ -15,6 +15,13 @@ ActiveRecord::Schema.define(version: 2021_04_21_205130) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "t_apps", id: :serial, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "img_src", null: false
+    t.decimal "pos_x", null: false
+    t.decimal "pos_y", null: false
+  end
+
   create_table "t_users", force: :cascade do |t|
     t.string "firstname", default: "", null: false
     t.string "lastname", default: "", null: false

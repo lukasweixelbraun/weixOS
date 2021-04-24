@@ -1,0 +1,34 @@
+@import "variables";
+
+html, body {
+  font-family: $family-sans-serif !important;
+  color: $beige-darker !important;
+  background-color: $black-background !important;
+
+  max-height: 100vh;
+  height: 100vh;
+  max-width: 100vw;
+  width: 100vw;
+
+  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+button {
+  cursor: pointer;
+}
+
+.light-font {
+  color: $beige-light;
+}
+
+.devise_screen {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 35px;
+  background-color: $beige-lighter;
+  border-radius: 5px;
+}

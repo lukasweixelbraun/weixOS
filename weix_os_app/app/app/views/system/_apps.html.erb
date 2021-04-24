@@ -1,0 +1,9 @@
+<% apps.each do |app| %>
+  <div id="app-<%= app.id %>" class="app" draggable="true" ondragstart="dragApp(event)" style="left: <%= app.pos_x %>%; top: <%= app.pos_y %>%;">
+    <img src="<%= app.img_src %>" class="icon" draggable="false" />
+
+    <span class="text">
+      <%= app.name %>
+    </span>
+  </div>
+<% end %>

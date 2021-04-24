@@ -1,0 +1,34 @@
+@import "variables";
+
+.desktop {
+  background: asset_url("background.img") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  height: calc(100% - 42px);
+}
+
+.desktop > .app {
+  position: absolute;
+  width: $app-size;
+  height: auto;
+  cursor: pointer;
+}
+
+.desktop > .app > .icon {
+  margin-left: $app-size / 2;
+  margin-top: $app-size / 4;
+  width: $app-size;
+  height: $app-size;
+  background-color: $beige-light;
+}
+
+.desktop > .app > .text {
+  display: inline-block;
+  width: $app-size * 2;
+  height: auto;
+  word-wrap: anywhere;
+  text-align: center;
+}

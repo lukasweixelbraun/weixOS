@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  self.table_name = "t_user"
+  self.table_name = "t_users"
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable, :recoverable, :rememberable and :omniauthable

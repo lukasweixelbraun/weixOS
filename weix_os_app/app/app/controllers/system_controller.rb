@@ -1,6 +1,11 @@
 class SystemController < ActionController::Base
+  before_action :authenticate_user!
 
-  def boot
+  def desktop
+    @apps = Apps.all
+  end
+
+  def lockscreen
     
   end
 
