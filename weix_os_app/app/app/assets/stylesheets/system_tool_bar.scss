@@ -8,6 +8,7 @@
   height: $system-toolbar-height;
   width: 100%;
   bottom: 0px;
+  z-index: $system-toolbar-z-index;
 }
 
 .system-tool-bar > div {

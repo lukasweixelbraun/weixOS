@@ -13,7 +13,7 @@
   </head>
 
   <body>
-    <div class="desktop" ondrop="dropApp(event)" ondragover="allowAppDrop(event)">
+    <div id="desktop" ondrop="dropApp(event)" ondragover="allowAppDrop(event)">
       <%= yield %>
 
       <%= render partial: 'apps', locals: { apps: @apps } %>

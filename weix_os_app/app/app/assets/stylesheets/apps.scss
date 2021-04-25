@@ -1,0 +1,35 @@
+@import "variables";
+
+.window.app-window {
+  z-index: $app-window-z-index;
+
+  width: 60vw;
+  height: 60vh;
+}
+
+.window.app-window > .app-title-bar {
+  position: relative;
+  top: 0%;
+  width: 100%;
+  height: 25px;
+  background-color: $beige-dark;
+}
+
+.window.app-window > .app-title-bar > .app-close {
+  float: right;
+  margin: 5px;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+
+  background-color: $red;
+  color: $beige-lighter;
+
+  cursor: pointer;
+}
+
+.window.app-window > .app-body {
+  padding: 35px;
+  height: 100%;
+  width: 100%;
+}

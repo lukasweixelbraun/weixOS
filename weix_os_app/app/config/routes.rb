@@ -4,6 +4,9 @@ Rails.application.routes.draw do
 
   root to: "system#desktop"
 
-  post 'apps/update_pos' => 'apps#update_pos', as: :update_pos
+  namespace :my_apps do
+    post 'update_pos' => 'apps#update_pos', as: :update_pos
+    post 'open_window' => 'apps#open_window', as: :open_window
+  end
 
 end

@@ -6,7 +6,6 @@
 
 // -----------  colors  -----------
 
-
 // Global colors
 $black-background: #333;
 $red: #a73939;
@@ -41,12 +40,17 @@ $input-shadow: none;
 
 
 // -----------  sizes  -----------
-
-$app-size: 60px;
-
+$app-size: 120px;
 $system-toolbar-height: 42px;
 
 
+
+
+
+
+// -----------  z-index  -----------
+$system-toolbar-z-index: 100;
+$app-window-z-index: 1000;
 
 
 

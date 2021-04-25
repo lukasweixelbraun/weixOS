@@ -6,15 +6,17 @@
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
+import moment from "moment"
 import "channels"
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-//var x = el.offsetLeft, y = el.offsetTop;
 
-var appWidth = 150, appHight = 150;
+// --- Drag and Drop Apps ---
+
+var appWidth = 140, appHeight = 130;
 var dragElement = ""
 
 window.allowAppDrop = function(ev) {
@@ -33,14 +35,28 @@ window.dropApp = function(ev) {
   var x = ev.clientX, y = ev.clientY;
 
   var gridX = Math.ceil(x / appWidth); // dropped into gridX
-  var gridY = Math.ceil(y / appHight); // dropped into gridY
+  var gridY = Math.ceil(y / appHeight); // dropped into gridY
  
   var leftTotal = gridX / desktop_grid_anzahl_x() * 100; // left: %
   var topTotal = gridY / desktop_grid_anzahl_y() * 100; // top: %
 
   // transform -50%
   var left = leftTotal - (appWidth / window.innerWidth * 100);
-  var top = topTotal - (appHight / window.innerHeight * 100);
+  var top = topTotal - (appHeight / window.innerHeight * 100);
+
+  if((window.innerWidth / 100 * left + appWidth) > window.innerWidth) {
+    x -= appWidth;
+    gridX = Math.ceil(x / appWidth); // dropped into gridX
+    leftTotal = gridX / desktop_grid_anzahl_x() * 100; // left: %
+    left = leftTotal - (appWidth / window.innerWidth * 100);
+  }
+
+  if((window.innerHeight / 100 * top + appHeight) > window.innerHeight) {
+    y -= appHeight;
+    gridY = Math.ceil(y / appHeight); // dropped into gridY
+    topTotal = gridY / desktop_grid_anzahl_y() * 100; // top: %
+    top = topTotal - (appHeight / window.innerHeight * 100);
+  }
 
   el.style.left = left + "%";
   el.style.top = top + "%";
@@ -48,17 +64,17 @@ window.dropApp = function(ev) {
   $.ajax({
     global: false,
     type: "POST",
-    url: "/apps/update_pos",
+    url: "/my_apps/update_pos",
     dataType: 'json',
     data: {
          id: app_id,
          pos_x: left,
          pos_y: top
     },
-    success: function (response) {
+    error: function (response) {
         console.log(response);
     }
-});
+  });
 }
 
 window.desktop_grid_anzahl_x = function() {
@@ -68,5 +84,98 @@ window.desktop_grid_anzahl_x = function() {
 
 window.desktop_grid_anzahl_y = function() {
   var windowHeight = window.innerHeight;
-  return windowHeight / appHight; // insgesamt anzahl an grids
+  return windowHeight / appHeight; // insgesamt anzahl an grids
 }
+
+
+// --- App Window Drag ---
+
+function enableDrag(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  var title_bar = null;
+
+  for (var i = 0; i < elmnt.childNodes.length; i++) {
+    if (elmnt.childNodes[i].className == "app-title-bar") {
+      title_bar = elmnt.childNodes[i];
+      break;
+    }        
+  }
+
+  if (title_bar != null) {
+    // if present, the header is where you move the DIV from:
+    title_bar.onmousedown = dragMouseDown;
+  } else {
+    // otherwise - dont move the div
+    e.preventDefault();
+    return;
+  }
+
+  function dragMouseDown(e) {
+    title_bar.style.cursor = "move"; 
+
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    title_bar.style.cursor = "default";
+
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+
+// -- Open App Window ---
+
+window.openApp = function(e, app_id) {
+  $.ajax({
+    global: false,
+    type: "POST",
+    url: "/my_apps/open_window",
+    dataType: 'html',
+    data: {
+         id: app_id
+    },
+    success: function (html) {
+      var app = document.createElement('div');
+      app.innerHTML = html;
+
+      while(app.firstChild) {
+        document.getElementById('desktop').appendChild(app.firstChild);
+      }
+
+      enableDrag(document.getElementById('app-window-id-' + app_id));
+    }
+  });
+}
+
+
+// --- Date Time for System Time ---
+
+window.getSystemTime = function() {
+  let now = moment().format('dd, DD. MMM HH:mm');
+  document.getElementById('system-time').textContent = now;
+}
+
+setInterval(getSystemTime, 1000);

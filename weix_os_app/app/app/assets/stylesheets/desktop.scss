@@ -1,6 +1,6 @@
 @import "variables";
 
-.desktop {
+#desktop {
   background: asset_url("background.img") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -10,24 +10,24 @@
   height: calc(100% - 42px);
 }
 
-.desktop > .app {
+#desktop > .app {
   position: absolute;
   width: $app-size;
   height: auto;
   cursor: pointer;
+  margin: 10px;
 }
 
-.desktop > .app > .icon {
-  margin-left: $app-size / 2;
-  margin-top: $app-size / 4;
-  width: $app-size;
-  height: $app-size;
+#desktop > .app > .icon {
+  width: $app-size / 2;
+  height: $app-size / 2;
+  margin: 0px $app-size / 4;
   background-color: $beige-light;
 }
 
-.desktop > .app > .text {
+#desktop > .app > .text {
   display: inline-block;
-  width: $app-size * 2;
+  width: $app-size;
   height: auto;
   word-wrap: anywhere;
   text-align: center;

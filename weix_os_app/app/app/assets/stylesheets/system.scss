@@ -10,9 +10,9 @@ html, body {
   max-width: 100vw;
   width: 100vw;
 
-  overflow: hidden;
-  overflow-y: hidden;
-  overflow-x: hidden;
+  overflow: hidden !important;
+  overflow-y: hidden !important;
+  overflow-x: hidden !important;
 }
 
 button {
@@ -23,12 +23,19 @@ button {
   color: $beige-light;
 }
 
-.devise_screen {
+.window {
   position: absolute;
+
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  padding: 35px;
+
   background-color: $beige-lighter;
+  border: 1px solid $beige-dark;
   border-radius: 5px;
+  box-shadow: 0 0 3px $beige-dark;
+}
+
+.window.devise-window {
+  padding: 35px;
 }
