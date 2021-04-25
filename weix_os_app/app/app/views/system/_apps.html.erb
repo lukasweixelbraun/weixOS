@@ -1,5 +1,5 @@
 <% apps.each do |app| %>
-  <div id="app-<%= app.id %>" class="app" draggable="true" ondblclick="openApp(event, <%= app.id %>);" ondragstart="dragApp(event)" style="left: <%= app.pos_x %>%; top: <%= app.pos_y %>%;">
+  <div id="app-<%= app.id %>" class="app" draggable="true" ondblclick="openApp(event, <%= app.id %>, '<%= app.img_src %>');" ondragstart="dragApp(event)" style="left: <%= app.pos_x %>%; top: <%= app.pos_y %>%;">
     <img src="<%= app.img_src %>" class="icon" draggable="false" />
 
     <span class="text">

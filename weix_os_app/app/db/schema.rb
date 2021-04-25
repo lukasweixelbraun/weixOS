@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2021_04_21_205130) do
 
   create_table "t_apps", id: :serial, force: :cascade do |t|
     t.string "name", null: false
+    t.string "template_name", null: false
     t.string "img_src", null: false
     t.decimal "pos_x", null: false
     t.decimal "pos_y", null: false

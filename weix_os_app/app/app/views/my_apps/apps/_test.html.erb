@@ -1,6 +1,8 @@
 <div id="app-window-id-<%=app.id%>" class="app-window window">
   <div class="app-title-bar">
-    <div class="app-close" onclick="document.getElementById('app-window-id-<%=app.id%>').remove();"></div>
+    <div class="app-button app-close" onclick="closeApp(event, <%=app.id%>)"></div>
+    <div class="app-button app-fullscreen" onclick="appFullscreen(event, <%=app.id%>)"></div>
+    <div class="app-button app-hide" onclick="hideApp(event, <%=app.id%>)"></div>
   </div>
 
   <div class="app-body">

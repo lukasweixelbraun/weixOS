@@ -17,7 +17,7 @@ ActiveStorage.start()
 // --- Drag and Drop Apps ---
 
 var appWidth = 140, appHeight = 130;
-var dragElement = ""
+var dragElement = "";
 
 window.allowAppDrop = function(ev) {
   ev.preventDefault();
@@ -145,10 +145,39 @@ function enableDrag(elmnt) {
   }
 }
 
+function addToToolbar(app_id, img_src) {
+  var toolbar = document.getElementById('pinned-applications');
+
+  var element = document.createElement('div');
+  element.classList.add('element');
+  element.setAttribute('id', ('element-app-id-' + app_id));
+
+  var app = document.createElement('div');
+  app.classList.add('app');
+
+  var app_icon = document.createElement('img');
+  app_icon.classList.add('icon');
+  app_icon.setAttribute('src', img_src);
+  app.appendChild(app_icon);
+
+  element.appendChild(app);
+
+  element.addEventListener('click', () => { hideApp(null, app_id); }, false );
+
+  toolbar.appendChild(element);
+}
 
 // -- Open App Window ---
 
-window.openApp = function(e, app_id) {
+window.openApp = function(e, app_id, img_src) {
+
+  if(document.getElementById('element-app-id-' + app_id)) {
+    if(document.getElementById('app-window-id-' + app_id).classList.contains('hidden')) {
+      hideApp(e, app_id);
+    }
+    return;
+  }
+
   $.ajax({
     global: false,
     type: "POST",
@@ -165,9 +194,24 @@ window.openApp = function(e, app_id) {
         document.getElementById('desktop').appendChild(app.firstChild);
       }
 
+      addToToolbar(app_id, img_src);
       enableDrag(document.getElementById('app-window-id-' + app_id));
     }
   });
+}
+
+
+window.hideApp = function(e, id) {
+  document.getElementById('app-window-id-' + id).classList.toggle('hidden');
+}
+
+window.appFullscreen = function(e, id) {
+  document.getElementById('app-window-id-' + id).classList.toggle('fullscreen');
+}
+
+window.closeApp = function(e, id) {
+  document.getElementById('app-window-id-' + id).remove();
+  document.getElementById('element-app-id-' + id).remove();
 }
 
 
@@ -178,4 +222,4 @@ window.getSystemTime = function() {
   document.getElementById('system-time').textContent = now;
 }
 
-setInterval(getSystemTime, 1000);
+setInterval(getSystemTime, 2000);
