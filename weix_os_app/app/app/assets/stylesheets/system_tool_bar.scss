@@ -16,17 +16,80 @@
   height: $system-toolbar-height;
 }
 
-.system-tool-bar > div > button {
+.system-tool-bar > .system-menue {
+  width: $system-toolbar-height;
+  float: left;
+}
+
+.system-tool-bar > .system-menue > button {
+  padding: 0px;
   border-radius: 0px;
   border: 0px;
   height: $system-toolbar-height;
   width: $system-toolbar-height;
+  background-color: $beige-darker;
+  border: 1px solid $beige-pitch-black;
 }
 
-.system-menue {
-  width: $system-toolbar-height;
+.system-tool-bar > .system-menue > button > .icon {
+  width: 100%;
+  height: 100%;
+}
+
+.system-tool-bar > .system-menue > button:hover {
+  background-color: $beige-black;
+}
+
+.system-tool-bar > .system-menue > .menue-box {
+  position: relative;
+  height: $system-menue-height;
+  width: $system-menue-width;
+  top: calc(-55vh - 48px);
+  background-color: $beige-black;
+  padding: 15px;
+}
+
+.system-tool-bar > .system-menue > .menue-box.hidden {
+  display: none;
+}
+
+.system-tool-bar > .system-menue > .menue-box > .vr {
+  float: left !important;
+  margin: 0px 15px !important;
+}
+
+.system-tool-bar > .system-menue > .menue-box > .menue-left {
+  width: calc(60% - 16px);
+  height: 100%;
   float: left;
 }
+
+.system-tool-bar > .system-menue > .menue-box > .menue-right {
+  width: calc(40% - 15px);
+  height: 100%;
+  float: right;
+}
+
+.system-tool-bar > .system-menue > .menue-box > .menue-right > button {
+  border-radius: 0px;
+  width: 100%;
+  height: $system-toolbar-height;
+  border: 1px solid $beige-pitch-black;
+  -moz-box-shadow: inset 0 0 3px $beige-pitch-black;
+  -webkit-box-shadow: inset 0 0 3px $beige-pitch-black;
+  box-shadow: inset 0 0 3px $beige-pitch-black;
+  background-color: $beige-darker;
+  color: $orange-light;
+  position: relative;
+  bottom: -90%;
+}
+
+.system-tool-bar > .system-menue > .menue-box > .menue-right > button:hover {
+  background-color: $beige-black;
+}
+
+
+
 
 .system-pinned-applications {
   border: 1px solid $beige-pitch-black;
@@ -48,6 +111,7 @@
   float: right;
   padding: 8px;
 }
+
 
 // --- list of pinned applications ---
 

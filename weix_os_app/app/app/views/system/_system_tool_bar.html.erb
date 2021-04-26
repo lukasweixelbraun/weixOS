@@ -1,9 +1,23 @@
 <div class="system-tool-bar">
   <!-- menue -->
   <div class="system-menue">
-    <button>
-      W
+    <button onclick="openSystemMenue(event);">
+      <img src="https://i.pinimg.com/originals/9f/88/36/9f88367196529f0c55008438904a2c9b.jpg" class="icon" draggable="false" />
     </button>
+
+    <div id="system-menue-box" class="menue-box hidden" >
+      <div class="menue-left">
+
+      </div>
+
+      <div class="menue-right">
+        <button onclick="logOut();">
+          Abmelden
+        </button>
+      </div>
+
+      <span class="vr"></span>
+    </div>
   </div>
 
   <!-- list of pinned applications -->
