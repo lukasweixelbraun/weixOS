@@ -45,6 +45,24 @@
   width: 100%;
 }
 
+.window.app-window.tiling-left {
+  top: 0px !important;
+  left: 0px !important;
+  width: 50% !important;
+  height: calc(100% - 42px) !important;
+  transform: translate(0%, 0%) !important;
+  position: fixed !important;
+}
+
+.window.app-window.tiling-right {
+  top: 0px !important;
+  left: 100% !important;
+  width: 50% !important;
+  height: calc(100% - 42px) !important;
+  transform: translate(-100%, 0%) !important;
+  position: fixed !important;
+}
+
 .window.app-window.fullscreen {
   top: 0px !important;
   left: 0px !important;
@@ -53,6 +71,8 @@
   height: calc(100% - 42px) !important;
   transform: translate(0%, 0%) !important;
 }
+
+
 
 .window.app-window.hidden {
   display: none;

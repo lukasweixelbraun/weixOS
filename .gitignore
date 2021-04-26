@@ -43,3 +43,5 @@
 /weix_os_app/app/node_modules/*
 
 /weix_os_app/app/public/assets/*
+
+/weix_os_app/app/yarn-error.log
