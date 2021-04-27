@@ -52,9 +52,11 @@ $system-menu-height: 55vh;
 
 
 // -----------  z-index  -----------
-$context-menu-z-index: 10000;
-$system-toolbar-z-index: 1000;
-$app-window-z-index: 100;
+$system-message-z-index: 50;
+$system-message-container-z-index: 40; 
+$context-menu-z-index: 30;
+$system-toolbar-z-index: 20;
+$app-window-z-index: 10;
 
 
 

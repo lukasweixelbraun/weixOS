@@ -36,8 +36,7 @@
 #desktop > .context-menu {
   position: absolute;
   padding: 5px;
-  //height: 300px;
-  width: 200px;
+  min-width: 200px;
   background-color: $beige-dark;
   z-index: $context-menu-z-index;
 

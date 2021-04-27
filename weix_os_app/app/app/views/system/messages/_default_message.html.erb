@@ -1,0 +1,14 @@
+<div class="message <%= type %>">
+  <div class="system-message-title">
+    <%= title %>
+  </div>
+
+  <div class="system-message-body">
+    <%= message %>
+  </div>
+
+  <div class="system-message-button-bar">
+    <button onclick="dismissSystemMessage(event, 'OK');">CANCEL</button>
+    <button onclick="dismissSystemMessage(event, 'OK');">OK</button>
+  </div>
+</div>

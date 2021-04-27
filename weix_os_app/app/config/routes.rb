@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   root to: "system#desktop"
 
+  post 'system/create_message' => 'system#create_message', as: :create_message
+
   namespace :my_apps do
     # app
     post 'update_pos' => 'app#update_pos', as: :update_pos

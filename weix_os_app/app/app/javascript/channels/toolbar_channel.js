@@ -56,5 +56,6 @@ window.logOut = function() {
 window.openSystemMenu = function(e) {
   e.preventDefault();
   document.getElementById('system-menu-box').classList.toggle('hidden');
+  document.getElementById('app-search-input').focus();
   e.stopPropagation();
 }

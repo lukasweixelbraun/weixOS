@@ -39,3 +39,57 @@ button {
 .window.devise-window {
   padding: 35px;
 }
+
+#system-message-overlay {
+  position: absolute;
+  z-index: $system-message-container-z-index;
+  height: 100vh;
+  width: 100vw;
+  opacity: 0.4;
+  background-color: $beige-dark;
+}
+
+#system-message-overlay.hidden {
+  display: none;
+}
+
+.system-message {
+  z-index: $system-message-z-index;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 20vw;
+  transform: translate(-50%, -50%);
+  opacity: 0.95;
+  background-color: $beige-darker;
+
+  -moz-box-shadow: 0 0 5px $beige-pitch-black;
+  -webkit-box-shadow: 0 0 5px $beige-pitch-black;
+  box-shadow: 0 0 5px $beige-pitch-black;
+}
+
+.system-message > .message {
+  background-color: $beige-darker;
+  color: $beige-light;
+}
+
+.system-message > .message > .system-message-title {
+  padding: 10px;
+  font-weight: 900;
+}
+
+.system-message > .message > .system-message-body {
+  padding: 10px;
+}
+
+.system-message > .message > .system-message-button-bar {
+  padding: 10px;
+}
+
+.system-message > .message > .system-message-button-bar > button {
+  margin: 0px;
+  width: calc(50% - 3px);
+  background-color: $beige-darker;
+  color: $orange-light;
+  border: none;
+}
