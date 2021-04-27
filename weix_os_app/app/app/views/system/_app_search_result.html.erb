@@ -1,0 +1,6 @@
+<% apps.each do |app| %>
+  <button onclick="openApp(event, <%= app.id %>, '<%= app.img_src %>', 50, 50, null);">
+    <img src="<%= app.img_src %>" class="icon" draggable="false" />
+    <%= app.name %>
+  </button>
+<% end %>

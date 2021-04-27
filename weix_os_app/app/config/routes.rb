@@ -5,9 +5,16 @@ Rails.application.routes.draw do
   root to: "system#desktop"
 
   namespace :my_apps do
+    # app
     post 'update_pos' => 'app#update_pos', as: :update_pos
-    post 'update_window_pos' => 'app#update_window_pos', as: :update_window_pos
+    post 'create_sym_link' => 'app#create_sym_link', as: :create_sym_link
+    post 'open_context_menu' => 'app#open_context_menu', as: :open_context_menu
+    post 'add_app_to_desktop' => 'app#add_app_to_desktop', as: :add_app_to_desktop
+    post 'search' => 'app#search', as: :search
 
+    # window save_window_state
+    post 'save_window_state' => 'app#save_window_state', as: :save_window_state
+    post 'update_window_pos' => 'app#update_window_pos', as: :update_window_pos
     post 'open_window' => 'app#open_window', as: :open_window
     post 'close_window' => 'app#close_window', as: :close_window
   end

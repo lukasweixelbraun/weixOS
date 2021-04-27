@@ -1,16 +1,20 @@
 <div class="system-tool-bar">
-  <!-- menue -->
-  <div class="system-menue" onclick="event.stopPropagation();">
-    <button onclick="openSystemMenue(event);">
+  <!-- menu -->
+  <div class="system-menu" onclick="event.stopPropagation();">
+    <button onclick="openSystemMenu(event);">
       <img src="https://i.pinimg.com/originals/9f/88/36/9f88367196529f0c55008438904a2c9b.jpg" class="icon" draggable="false" />
     </button>
 
-    <div id="system-menue-box" class="menue-box hidden" >
-      <div class="menue-left">
+    <div id="system-menu-box" class="menu-box hidden" >
+      <div class="menu-left">
+        <div id="app-search-result">
+          
+        </div>
 
+        <input id="app-search-input" class="app-search" type="text" onkeyup="appSearchEvent(event);" />
       </div>
 
-      <div class="menue-right">
+      <div class="menu-right">
         <div class="current-user">
           <div class="user-profile">
             <img src="https://i.pinimg.com/originals/9f/88/36/9f88367196529f0c55008438904a2c9b.jpg" class="profile-picture" draggable="false" />

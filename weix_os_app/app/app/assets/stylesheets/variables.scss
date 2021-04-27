@@ -43,8 +43,8 @@ $input-shadow: none;
 // -----------  sizes  -----------
 $app-size: 120px;
 $system-toolbar-height: 42px;
-$system-menue-width: 25vw;
-$system-menue-height: 55vh;
+$system-menu-width: 25vw;
+$system-menu-height: 55vh;
 
 
 
@@ -52,6 +52,7 @@ $system-menue-height: 55vh;
 
 
 // -----------  z-index  -----------
+$context-menu-z-index: 10000;
 $system-toolbar-z-index: 1000;
 $app-window-z-index: 100;
 

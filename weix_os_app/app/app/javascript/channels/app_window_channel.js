@@ -115,50 +115,20 @@ function enableDrag(app_id, elmnt) {
       url: "/my_apps/update_window_pos",
       dataType: 'json',
       data: {
-           id: app_id,
-           window_pos_x: left,
-           window_pos_y: top
-      },
-      error: function (response) {
-          console.log(response);
+        id: app_id,
+        window_pos_x: left,
+        window_pos_y: top
       }
     });
+
+    saveWindowState(app_id);
   }
 }
 
 
-
-
-
 // -- Open App Window ---
 
-function addToToolbar(app_id, img_src) {
-  var toolbar = document.getElementById('pinned-applications');
-
-  var element = document.createElement('div');
-  element.classList.add('element');
-  element.setAttribute('id', ('element-app-id-' + app_id));
-
-  var app = document.createElement('div');
-  app.classList.add('app');
-
-  var app_icon = document.createElement('img');
-  app_icon.classList.add('icon');
-  app_icon.setAttribute('src', img_src);
-  app.appendChild(app_icon);
-
-  element.appendChild(app);
-
-  element.addEventListener('click', (event) => { hideApp(event, app_id); }, false );
-
-  //TODO open contextmenu
-  element.addEventListener('contextmenu', (event) => { closeApp(event, app_id); }, false );
-
-  toolbar.appendChild(element);
-}
-
-
-window.openApp = function(e, app_id, img_src, window_pos_x, window_pos_y) {
+window.openApp = function(e, app_id, img_src, window_pos_x, window_pos_y, last_state) {
 
   if(document.getElementById('element-app-id-' + app_id)) {
     if(document.getElementById('app-window-id-' + app_id).classList.contains('hidden')) {
@@ -167,15 +137,20 @@ window.openApp = function(e, app_id, img_src, window_pos_x, window_pos_y) {
     return;
   }
 
+  if(last_state == null) {
+    last_state = ""
+  }
+
   $.ajax({
     global: false,
     type: "POST",
     url: "/my_apps/open_window",
     dataType: 'html',
     data: {
-          id: app_id,
-          window_pos_x: window_pos_x,
-          window_pos_y: window_pos_y
+      id: app_id,
+      window_pos_x: window_pos_x,
+      window_pos_y: window_pos_y,
+      last_state: last_state
     },
     success: function (html) {
       var app = document.createElement('div');
@@ -191,15 +166,16 @@ window.openApp = function(e, app_id, img_src, window_pos_x, window_pos_y) {
   });
 }
 
-
 window.hideApp = function(e, id) {
   e.preventDefault();
   document.getElementById('app-window-id-' + id).classList.toggle('hidden');
+  saveWindowState(id);
 }
 
 window.appFullscreen = function(e, id) {
   e.preventDefault();
   document.getElementById('app-window-id-' + id).classList.toggle('fullscreen');
+  saveWindowState(id);
 }
 
 window.closeApp = function(e, id) {
@@ -213,10 +189,26 @@ window.closeApp = function(e, id) {
     url: "/my_apps/close_window",
     dataType: 'json',
     data: {
-          id: id
-    },
-    error: function (e) {
-      console.log(e);
+      id: id
     }
   });
+}
+
+function saveWindowState(id) {
+  var window_state = document.getElementById('app-window-id-' + id).classList.toString();
+  window_state = window_state.replace(",", " ");
+  window_state = window_state.replace("app-window", "");
+  window_state = window_state.replace("window", "");
+
+  $.ajax({
+    global: false,
+    type: "POST",
+    url: "/my_apps/save_window_state",
+    dataType: 'json',
+    data: {
+      id: id,
+      last_state: window_state
+    }
+  });
+
 }

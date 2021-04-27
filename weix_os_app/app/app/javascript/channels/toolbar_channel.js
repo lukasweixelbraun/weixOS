@@ -1,5 +1,30 @@
 import moment from "moment"
 
+var typingTimer = void 0;
+var doneTypingInterval = 300;
+
+window.appSearchEvent = function(e) {
+  clearTimeout(typingTimer);
+  typingTimer = setTimeout(searchApp, doneTypingInterval, e.target.value);
+  return;
+};
+
+function searchApp(appName) {
+  $.ajax({
+    global: false,
+    type: "post",
+    url: "/my_apps/search",
+    dataType: 'html',
+    data: {
+      searchText: appName
+    },
+    success: function (html) {
+      var searchResult = document.getElementById('app-search-result');
+      searchResult.innerHTML = html;
+    }
+  });
+}
+
 // --- Date Time for System Time ---
 
 window.getSystemTime = function() {
@@ -21,15 +46,15 @@ window.logOut = function() {
     dataType: 'html',
     success: function (html) {
       console.log("Good Bye!");
-      Turbolinks.clearCache()
-      Turbolinks.visit("http://localhost:3000/", {"action":"replace"})
+      Turbolinks.clearCache();
+      Turbolinks.visit("http://localhost:3000/", { "action":"replace" });
       
     }
   });
 }
 
-window.openSystemMenue = function(e) {
+window.openSystemMenu = function(e) {
   e.preventDefault();
-  document.getElementById('system-menue-box').classList.toggle('hidden');
+  document.getElementById('system-menu-box').classList.toggle('hidden');
   e.stopPropagation();
 }

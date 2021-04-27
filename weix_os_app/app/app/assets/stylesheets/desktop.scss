@@ -32,3 +32,30 @@
   word-wrap: anywhere;
   text-align: center;
 }
+
+#desktop > .context-menu {
+  position: absolute;
+  padding: 5px;
+  //height: 300px;
+  width: 200px;
+  background-color: $beige-dark;
+  z-index: $context-menu-z-index;
+
+  -moz-box-shadow: 0 0 5px $beige-pitch-black;
+  -webkit-box-shadow: 0 0 5px $beige-pitch-black;
+  box-shadow: 0 0 5px $beige-pitch-black;
+}
+
+#desktop > .context-menu > .menu > button {
+  width: 100%;
+  border-radius: 0px;
+  height: 30px;
+  border: 0px solid transparent;
+  text-align: left;
+  background-color: transparent;
+  color: $orange-light;
+}
+
+#desktop > .context-menu > .menu > button:hover {
+  background-color: $beige-black;
+}

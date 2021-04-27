@@ -16,12 +16,12 @@
   height: $system-toolbar-height;
 }
 
-.system-tool-bar > .system-menue {
+.system-tool-bar > .system-menu {
   width: $system-toolbar-height;
   float: left;
 }
 
-.system-tool-bar > .system-menue > button {
+.system-tool-bar > .system-menu > button {
   padding: 0px;
   border-radius: 0px;
   border: 0px;
@@ -31,47 +31,41 @@
   border: 1px solid $beige-pitch-black;
 }
 
-.system-tool-bar > .system-menue > button > .icon {
+.system-tool-bar > .system-menu > button > .icon {
   width: 100%;
   height: 100%;
 }
 
-.system-tool-bar > .system-menue > button:hover {
+.system-tool-bar > .system-menu > button:hover {
   background-color: $beige-black;
 }
 
-.system-tool-bar > .system-menue > .menue-box {
+.system-tool-bar > .system-menu > .menu-box {
   position: relative;
-  height: $system-menue-height;
-  width: $system-menue-width;
+  height: $system-menu-height;
+  width: $system-menu-width;
   top: calc(-55vh - 48px);
   background-color: $beige-black;
   padding: 15px;
   color: $beige-light;
 }
 
-.system-tool-bar > .system-menue > .menue-box.hidden {
+.system-tool-bar > .system-menu > .menu-box.hidden {
   display: none;
 }
 
-.system-tool-bar > .system-menue > .menue-box > .vr {
+.system-tool-bar > .system-menu > .menu-box > .vr {
   float: left !important;
   margin: 0px 15px !important;
 }
 
-.system-tool-bar > .system-menue > .menue-box > .menue-left {
+.system-tool-bar > .system-menu > .menu-box > .menu-left {
   width: calc(60% - 16px);
   height: 100%;
   float: left;
 }
 
-.system-tool-bar > .system-menue > .menue-box > .menue-right {
-  width: calc(40% - 15px);
-  height: 100%;
-  float: right;
-}
-
-.system-tool-bar > .system-menue > .menue-box > .menue-right > button {
+.system-tool-bar > .system-menu > .menu-box > .menu-left > .app-search {
   border-radius: 0px;
   width: 100%;
   height: $system-toolbar-height;
@@ -81,11 +75,58 @@
   box-shadow: inset 0 0 3px $beige-pitch-black;
   background-color: $beige-darker;
   color: $orange-light;
+  top: -42px;
   position: relative;
-  //bottom: -90%;
 }
 
-.system-tool-bar > .system-menue > .menue-box > .menue-right > button:hover {
+.system-tool-bar > .system-menu > .menu-box > .menu-left > #app-search-result {
+  height: 100%;
+  width: 100%;
+}
+
+.system-tool-bar > .system-menu > .menu-box > .menu-left > #app-search-result > button {
+  border-radius: 0px;
+  width: 100%;
+  height: $system-toolbar-height;
+  border: 1px solid $beige-pitch-black;
+  -moz-box-shadow: inset 0 0 3px $beige-pitch-black;
+  -webkit-box-shadow: inset 0 0 3px $beige-pitch-black;
+  box-shadow: inset 0 0 3px $beige-pitch-black;
+  background-color: $beige-darker;
+  color: $orange-light;
+  padding: 10px;
+}
+
+.system-tool-bar > .system-menu > .menu-box > .menu-left > #app-search-result > button:hover {
+  background-color: $beige-black;
+}
+
+.system-tool-bar > .system-menu > .menu-box > .menu-right {
+  width: calc(40% - 15px);
+  height: 100%;
+  float: right;
+}
+
+.system-tool-bar > .system-menu > .menu-box > .menu-right > .current-user {
+  height: 100%;
+  width: 100%;
+}
+
+.system-tool-bar > .system-menu > .menu-box > .menu-right > button {
+  border-radius: 0px;
+  width: 100%;
+  height: $system-toolbar-height;
+  border: 1px solid $beige-pitch-black;
+  -moz-box-shadow: inset 0 0 3px $beige-pitch-black;
+  -webkit-box-shadow: inset 0 0 3px $beige-pitch-black;
+  box-shadow: inset 0 0 3px $beige-pitch-black;
+  background-color: $beige-darker;
+  color: $orange-light;
+  top: -42px;
+  position: relative;
+}
+
+.system-tool-bar > .system-menu > .menu-box > .menu-right > button:hover {
   background-color: $beige-black;
 }
 
