@@ -6,6 +6,6 @@
   </div>
 
   <div class="app-body">
-    Test
+    <%= render partial: "my_apps/#{app.template_name}", locals: { app: app } %>
   </div>
 </div>

@@ -25,7 +25,7 @@ module MyApps
       user_app.is_opened = true
       user_app.save!
       
-      return render partial: "#{app.template_name}", locals: { app: app, pos_x: window_pos_x, pos_y: window_pos_y }
+      return render partial: "system/app_window", locals: { app: app, pos_x: window_pos_x, pos_y: window_pos_y }
     end
 
     def close_window
