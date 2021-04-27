@@ -31,4 +31,5 @@ window.logOut = function() {
 window.openSystemMenue = function(e) {
   e.preventDefault();
   document.getElementById('system-menue-box').classList.toggle('hidden');
+  e.stopPropagation();
 }

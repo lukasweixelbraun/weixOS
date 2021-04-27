@@ -1,9 +1,19 @@
 <% apps.each do |app| %>
-  <div id="app-<%= app.id %>" class="app" draggable="true" ondblclick="openApp(event, <%= app.id %>, '<%= app.img_src %>');" ondragstart="dragApp(event)" style="left: <%= app.pos_x %>%; top: <%= app.pos_y %>%;">
+  <% user_app = app.user_apps.where(user_id: current_user.id).first %>
+  <div id="app-<%= app.id %>" class="app" draggable="true" 
+    ondblclick="openApp(event, <%= app.id %>, '<%= app.img_src %>', 50, 50);" 
+    ondragstart="dragApp(event)" 
+    style="left: <%= user_app['pos_x'] %>%; top: <%= user_app['pos_y'] %>%;">
+    
     <img src="<%= app.img_src %>" class="icon" draggable="false" />
 
     <span class="text">
       <%= app.name %>
     </span>
   </div>
+
+  <% if user_app['is_opened'] == true %>
+    <script>openApp(event, "<%= app.id %>", "'<%= app.img_src %>'", "<%= user_app['window_pos_x'] %>", "<%= user_app['window_pos_y'] %>");</script>
+  <% end %>
+
 <% end %>

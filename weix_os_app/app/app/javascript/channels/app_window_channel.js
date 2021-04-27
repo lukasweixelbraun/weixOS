@@ -1,6 +1,6 @@
 // --- App Window Drag ---
 
-function enableDrag(elmnt) {
+function enableDrag(app_id, elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   var title_bar = null;
 
@@ -54,11 +54,11 @@ function enableDrag(elmnt) {
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
 
     // check tiling
-    if(e.clientY <= 0) {
+    if(e.clientY <= 15) {
       tiling(e, 'top');
-    } else if(e.clientX <= 30) {
+    } else if(e.clientX <= 50) {
       tiling(e, 'left');
-    } else if(e.clientX >= window.innerWidth - 30) {
+    } else if(e.clientX >= window.innerWidth - 50) {
       tiling(e, 'right');
     } else {
       tiling(e, 'no tiling');
@@ -91,6 +91,30 @@ function enableDrag(elmnt) {
     // stop moving when mouse button is released:
     document.onmouseup = null;
     document.onmousemove = null;
+
+    console.log(elmnt.style.left.replace("px", ""));
+    console.log(window.innerWidth);
+
+    var left = elmnt.style.left.replace("px", "");
+    left = left / window.innerWidth * 100;
+
+    var top = elmnt.style.top.replace("px", ""); 
+    top = top / window.innerHeight * 100;
+
+    $.ajax({
+      global: false,
+      type: "POST",
+      url: "/my_apps/update_window_pos",
+      dataType: 'json',
+      data: {
+           id: app_id,
+           window_pos_x: left,
+           window_pos_y: top
+      },
+      error: function (response) {
+          console.log(response);
+      }
+    });
   }
 }
 
@@ -126,7 +150,7 @@ function addToToolbar(app_id, img_src) {
 }
 
 
-window.openApp = function(e, app_id, img_src) {
+window.openApp = function(e, app_id, img_src, window_pos_x, window_pos_y) {
 
   if(document.getElementById('element-app-id-' + app_id)) {
     if(document.getElementById('app-window-id-' + app_id).classList.contains('hidden')) {
@@ -141,7 +165,9 @@ window.openApp = function(e, app_id, img_src) {
     url: "/my_apps/open_window",
     dataType: 'html',
     data: {
-          id: app_id
+          id: app_id,
+          window_pos_x: window_pos_x,
+          window_pos_y: window_pos_y
     },
     success: function (html) {
       var app = document.createElement('div');
@@ -152,7 +178,7 @@ window.openApp = function(e, app_id, img_src) {
       }
 
       addToToolbar(app_id, img_src);
-      enableDrag(document.getElementById('app-window-id-' + app_id));
+      enableDrag(app_id, document.getElementById('app-window-id-' + app_id));
     }
   });
 }

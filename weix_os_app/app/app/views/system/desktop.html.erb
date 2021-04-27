@@ -10,7 +10,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body onclick="closeSystemMenue(event);">
     <div id="desktop" ondrop="dropApp(event)" ondragover="allowAppDrop(event)">
       <%= yield %>
 

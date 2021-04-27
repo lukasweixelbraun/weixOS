@@ -2,7 +2,7 @@ class SystemController < ActionController::Base
   before_action :authenticate_user!
 
   def desktop
-    @apps = Apps.all
+    @apps = current_user.apps
   end
 
   def lockscreen

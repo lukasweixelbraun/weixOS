@@ -47,6 +47,7 @@
   top: calc(-55vh - 48px);
   background-color: $beige-black;
   padding: 15px;
+  color: $beige-light;
 }
 
 .system-tool-bar > .system-menue > .menue-box.hidden {
@@ -81,7 +82,7 @@
   background-color: $beige-darker;
   color: $orange-light;
   position: relative;
-  bottom: -90%;
+  //bottom: -90%;
 }
 
 .system-tool-bar > .system-menue > .menue-box > .menue-right > button:hover {

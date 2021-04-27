@@ -1,4 +1,4 @@
-<div id="app-window-id-<%=app.id%>" class="app-window window">
+<div id="app-window-id-<%=app.id%>" class="app-window window" style="top: <%= pos_y %>%; left: <%= pos_x %>%;">
   <div class="app-title-bar" ondblclick="appFullscreen(event, <%=app.id%>)">
     <div class="app-button app-close" onclick="closeApp(event, <%=app.id%>)"></div>
     <div class="app-button app-fullscreen" onclick="appFullscreen(event, <%=app.id%>)"></div>

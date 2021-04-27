@@ -1,6 +1,6 @@
 <div class="system-tool-bar">
   <!-- menue -->
-  <div class="system-menue">
+  <div class="system-menue" onclick="event.stopPropagation();">
     <button onclick="openSystemMenue(event);">
       <img src="https://i.pinimg.com/originals/9f/88/36/9f88367196529f0c55008438904a2c9b.jpg" class="icon" draggable="false" />
     </button>
@@ -11,6 +11,16 @@
       </div>
 
       <div class="menue-right">
+        <div class="current-user">
+          <div class="user-profile">
+            <img src="https://i.pinimg.com/originals/9f/88/36/9f88367196529f0c55008438904a2c9b.jpg" class="profile-picture" draggable="false" />
+          </div>
+
+          <div class="user-name">
+            User: <%= current_user.email %>
+          </div>
+        </div>
+
         <button onclick="logOut();">
           Abmelden
         </button>

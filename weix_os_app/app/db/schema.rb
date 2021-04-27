@@ -15,12 +15,19 @@ ActiveRecord::Schema.define(version: 2021_04_21_205130) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "t_apps", id: :serial, force: :cascade do |t|
+  create_table "t_app", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.string "template_name", null: false
     t.string "img_src", null: false
+  end
+
+  create_table "t_app2users", id: :serial, force: :cascade do |t|
+    t.integer "app_id", null: false
+    t.integer "user_id", null: false
     t.decimal "pos_x", null: false
     t.decimal "pos_y", null: false
+    t.boolean "is_opened", default: false
+    t.string "last_state"
   end
 
   create_table "t_users", force: :cascade do |t|
@@ -33,4 +40,6 @@ ActiveRecord::Schema.define(version: 2021_04_21_205130) do
     t.index ["email"], name: "index_t_users_on_email", unique: true
   end
 
+  add_foreign_key "t_app2users", "t_app", column: "app_id", name: "t_app2users_app_id_fkey"
+  add_foreign_key "t_app2users", "t_users", column: "user_id", name: "t_app2users_user_id_fkey"
 end
