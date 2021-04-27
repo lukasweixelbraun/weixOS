@@ -18,7 +18,7 @@
         <% user_app = app.user_apps.where(user_id: current_user.id).first %>
 
         <% if user_app['desktop_link'] == true %>
-          <%= render partial: 'app', locals: { app: app, user_app: user_app } %>
+          <%= render partial: 'system/app/app', locals: { app: app, user_app: user_app } %>
         <% end %>
         
         <% if user_app['is_opened'] == true %>
