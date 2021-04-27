@@ -92,14 +92,22 @@ function enableDrag(app_id, elmnt) {
     document.onmouseup = null;
     document.onmousemove = null;
 
-    console.log(elmnt.style.left.replace("px", ""));
-    console.log(window.innerWidth);
+    var left = 50;
+    var top = 50;
 
-    var left = elmnt.style.left.replace("px", "");
-    left = left / window.innerWidth * 100;
+    if(elmnt.style.left.includes("px")) {
+      left = elmnt.style.left.replace("px", "");
+      left = left / window.innerWidth * 100;
+    } else if(elmnt.style.left.includes("%")) {
+      left = elmnt.style.left.replace("%", "");
+    }
 
-    var top = elmnt.style.top.replace("px", ""); 
-    top = top / window.innerHeight * 100;
+    if(elmnt.style.top.includes("px")) {
+      top = elmnt.style.top.replace("px", "");
+      top = top / window.innerHeight * 100;
+    } else if(elmnt.style.top.includes("%")) {
+      top = elmnt.style.top.replace("%", "");
+    }
 
     $.ajax({
       global: false,
@@ -198,4 +206,17 @@ window.closeApp = function(e, id) {
   e.preventDefault();
   document.getElementById('app-window-id-' + id).remove();
   document.getElementById('element-app-id-' + id).remove();
+
+  $.ajax({
+    global: false,
+    type: "POST",
+    url: "/my_apps/close_window",
+    dataType: 'json',
+    data: {
+          id: id
+    },
+    error: function (e) {
+      console.log(e);
+    }
+  });
 }

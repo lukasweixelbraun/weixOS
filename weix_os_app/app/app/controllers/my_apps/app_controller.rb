@@ -20,7 +20,20 @@ module MyApps
       app = current_user.apps.find(params[:id])
       window_pos_x = params[:window_pos_x]
       window_pos_y = params[:window_pos_y]
-      render partial: "#{app.template_name}", locals: { app: app, pos_x: window_pos_x, pos_y: window_pos_y }
+      
+      user_app = current_user.user_apps.where(app_id: params[:id]).first
+      user_app.is_opened = true
+      user_app.save!
+      
+      return render partial: "#{app.template_name}", locals: { app: app, pos_x: window_pos_x, pos_y: window_pos_y }
+    end
+
+    def close_window
+      user_app = current_user.user_apps.where(app_id: params[:id]).first
+      user_app.is_opened = false
+      user_app.save!
+
+      render :json => { :success => true }
     end
   
   end
