@@ -1,7 +1,7 @@
 <div class="system-tool-bar">
   <!-- menu -->
-  <div class="system-menu" onclick="event.stopPropagation();">
-    <button onclick="openSystemMenu(event);">
+  <div class="system-menu">
+    <button id="open-menu-btn">
       <img src="https://i.pinimg.com/originals/9f/88/36/9f88367196529f0c55008438904a2c9b.jpg" class="icon" draggable="false" />
     </button>
 
@@ -11,7 +11,7 @@
           
         </div>
 
-        <input id="app-search-input" class="app-search" type="text" onkeyup="appSearchEvent(event);" />
+        <input id="app-search-input" class="app-search" type="text"/>
       </div>
 
       <div class="menu-right">
@@ -25,7 +25,7 @@
           </div>
         </div>
 
-        <button onclick="logOut();">
+        <button id="log-out-btn">
           Abmelden
         </button>
       </div>
@@ -43,7 +43,6 @@
     <!-- system time -->
     <div class="element">
       <span id="system-time" class="time"></span>
-      <script>getSystemTime();</script>
     </div>
 
     <span class="vr"></span>

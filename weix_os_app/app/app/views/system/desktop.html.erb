@@ -6,12 +6,17 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= javascript_pack_tag 'desktop' %>
+    <%= javascript_pack_tag 'app' %>
+    <%= javascript_pack_tag 'window' %>
+    <%= javascript_pack_tag 'toolbar' %>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body onclick="closeSystemMenu(event);">
-    <div id="desktop" ondrop="dropApp(event)" ondragover="allowAppDrop(event)">
+  <body>
+    <div id="desktop">
       <%= yield %>
 
       <% @apps.each do |app| %>

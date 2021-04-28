@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_04_21_205130) do
     t.decimal "window_pos_x", null: false
     t.decimal "window_pos_y", null: false
     t.boolean "is_opened", default: false
+    t.boolean "desktop_link", default: false
     t.string "last_state"
   end
 

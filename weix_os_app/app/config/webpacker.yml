@@ -33,7 +33,8 @@ default: &default
     - .woff2
 
   extensions:
-    - .jsx
+    - .tsx
+    - .ts
     - .mjs
     - .js
     - .sass

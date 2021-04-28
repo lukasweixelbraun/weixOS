@@ -9,12 +9,7 @@ module MyApps
       return render partial: "system/toolbar/app_search_result", locals: { apps: apps }
     end
 
-    # desktop shortcut created, save the changes!
-    def create_sym_link
-      user_app = current_user.user_apps.where(app_id: params[:id]).first
-      user_app.desktop_link = params[:desktop_link]
-      user_app.save
-    end
+    
 
     # app icon position on desktop has changed, save it!
     def update_pos
@@ -31,10 +26,19 @@ module MyApps
       return render partial: "system/context_menu", locals: { app: app, template: template }
     end
 
+    # desktop shortcut created, save the changes!
+    def remove_app_to_desktop
+      user_app = current_user.user_apps.where(app_id: params[:id]).first
+      user_app.desktop_link = params[:desktop_link]
+      user_app.save
+    end
+
     # add icon to desktop
     def add_app_to_desktop
       app = current_user.apps.find(params[:id])
       user_app = app.user_apps.where(user_id: current_user.id).first # analog desktop
+      user_app.desktop_link = true
+      user_app.save
       return render partial: "system/app/app", locals: { app: app, user_app: user_app }
     end
 
