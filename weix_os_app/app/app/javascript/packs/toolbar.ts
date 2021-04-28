@@ -57,7 +57,9 @@ class Toolbar {
   }
 
   public closeSystemMenu() {
-    document.getElementById('system-menu-box').classList.toggle('hidden');
+    if(!document.getElementById('system-menu-box').classList.contains('hidden')) {
+      document.getElementById('system-menu-box').classList.toggle('hidden');
+    }
   }
 
   public openSystemMenu() {
