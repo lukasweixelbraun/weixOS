@@ -1,6 +1,12 @@
 import Turbolinks from "turbolinks"
 import * as moment from "moment";
 
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
 export class Toolbar {
 
   private static instance : Toolbar;
@@ -23,6 +29,9 @@ export class Toolbar {
       type: "post",
       url: "/my_apps/search",
       dataType: 'html',
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
       data: {
         searchText: appName
       },
@@ -42,18 +51,22 @@ export class Toolbar {
     }
   }
 
-  public logOut() {
-    $.ajax({
+  public async logOut() {
+    await $.ajax({
       global: false,
       type: "DELETE",
       url: "/users/sign_out",
       dataType: 'html',
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
       success: function (html) {
         console.log("Good Bye!");
-        Turbolinks.clearCache();
-        Turbolinks.visit("http://localhost:3000/", { "action":"replace" });
       }
     });
+
+    Turbolinks.clearCache();
+    Turbolinks.visit("http://localhost:3000/", { "action":"replace" });
   }
 
   public closeSystemMenu() {

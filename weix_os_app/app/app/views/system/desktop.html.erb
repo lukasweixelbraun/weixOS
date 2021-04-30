@@ -6,38 +6,19 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= javascript_pack_tag 'desktop' %>
-    <%= javascript_pack_tag 'app' %>
-    <%= javascript_pack_tag 'window' %>
-    <%= javascript_pack_tag 'toolbar' %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= javascript_pack_tag 'system', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'desktop', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'app', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'window', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'toolbar', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <div id="desktop">
       <%= yield %>
-
-      <% @apps.each do |app| %>
-        <% user_app = app.user_apps.where(user_id: current_user.id).first %>
-
-        <% if user_app['desktop_link'] == true %>
-          <%= render partial: 'system/app/app', locals: { app: app, user_app: user_app } %>
-        <% end %>
-        
-        <% if user_app['is_opened'] == true %>
-          <script>
-            openApp(event, 
-                    "<%= app.id %>", 
-                    "<%= app.img_src %>", 
-                    "<%= user_app['window_pos_x'] %>", 
-                    "<%= user_app['window_pos_y'] %>", 
-                    "<%= user_app['last_state'] %>");
-          </script>
-        <% end %>
-      <% end %>
-      
       <%= render partial: 'system/toolbar/system_tool_bar' %>
       <div id="system-message-overlay" class="hidden"></div>
     </div>

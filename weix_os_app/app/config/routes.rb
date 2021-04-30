@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root to: "system#desktop"
 
   post 'system/create_message' => 'system#create_message', as: :create_message
+  post 'system/load_apps' => 'system#load_apps', as: :load_apps
 
   namespace :my_apps do
     # app

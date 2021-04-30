@@ -1,4 +1,11 @@
 import { App } from "./app_controller"
+import { AppWindow } from "./window_controller";
+
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  }
+});
 
 export class Desktop {
 
@@ -6,12 +13,93 @@ export class Desktop {
   private static instance : Desktop;
   private apps : App[] = [];
 
+  private dragElementId :number = 0;
+
   private constructor() {
 
   }
 
-  public appendApp(id : number, pos_x : number, pos_y : number, name : string, img_src : string) {
-    this.apps.push(new App(id, pos_x, pos_y, name, img_src));
+  public loadApps(event) {
+    $.ajax({
+      global: false,
+      type: "post",
+      url: "/system/load_apps",
+      dataType: 'json',
+      success: function (data) {
+        if(data !== undefined) {
+          data.forEach(app_data => {
+            var user_settings = app_data['user_apps'][0];
+            var pos_x = 50;
+            var pos_y = 50;
+            var desktop_link = false;
+            var toolbar_link = false;
+
+            if(user_settings != undefined) {
+              pos_x = user_settings['pos_x'];
+              pos_y = user_settings['pos_y'];
+              desktop_link = user_settings['desktop_link'];
+              toolbar_link = user_settings['toolbar_link'];
+            }
+
+            var app = new App(app_data['id'], 
+                    pos_x, pos_y, 
+                    app_data['name'], 
+                    app_data['template_name'], 
+                    app_data['img_src'], 
+                    desktop_link,
+                    toolbar_link);
+
+            var window : AppWindow = null;
+
+            if(user_settings != undefined) {
+              var opened : boolean = user_settings['is_opened'];
+
+              if(opened == true) {
+                window = new AppWindow(app_data['id'],
+                  app_data['template_name'], 
+                  user_settings['window_pos_x'],
+                  user_settings['window_pos_y'],
+                  user_settings['last_state'],
+                  opened,
+                  app.getCloseWindowCallback()
+                );
+
+                window.open(event);
+                app.addToToolbar();
+              }
+            }
+
+            if(window != undefined) {
+              app.setWindow(window);
+            }
+
+            Desktop.getInstance().appendApp(app);
+          });
+        }
+      }
+    });
+  }
+
+  public appendApp(app : App) {
+    if(app.hasDesktopLink() == true) {
+      app.addToDesktop();
+    }
+
+    if(app.hasToolbarLink() == true) {
+      app.addToToolbar();
+    }
+
+    this.apps.push(app);
+  }
+
+  public getDragApp() {
+    console.log(this.dragElementId);
+    return this.getApp(this.dragElementId);
+  }
+
+  public setDragApp(id : number) {
+    console.log(id);
+    this.dragElementId = id;
   }
 
   public getApp(id : number) {
@@ -87,6 +175,7 @@ export class Desktop {
     event.preventDefault();
     this.closeContextMenus();
 
+    var desktop = this.getElement();
     var x = event.clientX;
     var y = event.clientY;
 
@@ -100,7 +189,7 @@ export class Desktop {
         template: contextTemplate
       },
       success: function (html) {
-        var desktop = this.getElement();
+        
 
         var menu = document.createElement('div');
         menu.classList.add('context-menu');

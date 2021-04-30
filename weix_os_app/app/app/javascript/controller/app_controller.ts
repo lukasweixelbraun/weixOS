@@ -1,48 +1,73 @@
 import { Desktop } from "./desktop_controller"
 import { AppWindow } from "./window_controller"
 
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
 export class App {
 
   private id : number = 0;
   private pos_x : number = 0;
   private pos_y : number = 0;
   private name : string = "";
+  private template_name : string = "";
   private img_src : string = "";
+  private desktop_link : boolean = false;
+  private toolbar_link : boolean = false;
+
+  private closeWindowCallback : () => void;
 
   private window : AppWindow = null;
 
   public static width = 140;
   public static height = 130;
 
-  constructor(id : number, pos_x : number, pos_y : number, name : string, img_src : string) {
+  constructor(id : number, pos_x : number, pos_y : number, name : string, template_name : string, img_src : string, desktop_link : boolean, toolbar_link : boolean) {
     this.id = id;
     this.pos_x = pos_x;
     this.pos_y = pos_y;
     this.name = name;
+    this.template_name = template_name;
     this.img_src = img_src;
+    this.desktop_link = desktop_link;
+    this.toolbar_link = toolbar_link;
+
+    this.closeWindowCallback = () => {
+      if(this.hasToolbarLink() == false) {
+        this.removeFromToolbar();
+      }
+  
+      this.window = null;
+    }
+  }
+
+  public getCloseWindowCallback() {
+    return this.closeWindowCallback;
+  }
+
+  public setWindow(window) {
+    this.window = window;
+  }
+
+  public hasDesktopLink() {
+    return this.desktop_link;
+  }
+
+  public hasToolbarLink() {
+    return this.toolbar_link;
   }
 
   public getId() {
     return this.id;
   }
 
-  public openWindow(event, pos_x : number, pos_y : number, last_state : string) {
-    this.window = new AppWindow(this.id, pos_x, pos_y, last_state);
+  public openWindow(event) {
+    this.window = new AppWindow(this.id, this.template_name, 50, 50, "", false, this.closeWindowCallback);
     this.window.open(event);
     this.addToToolbar();
-  }
-
-  public closeWindow() {
-    this.window.close();
-    this.removeFromToolbar();
-  }
-
-  public hideWindow() {
-    this.window.hide();
-  }
-
-  public fullscreenWindow() {
-    this.window.fullscreen();
   }
 
   public getElement() {
@@ -100,6 +125,10 @@ export class App {
   }
 
   public addToToolbar() {
+    if(this.getToolbarElement() != undefined) {
+      return;
+    }
+
     var toolbar = document.getElementById('pinned-applications');
 
     var element = document.createElement('div');
@@ -116,8 +145,12 @@ export class App {
 
     element.appendChild(app);
 
-    element.addEventListener('click', () => { 
-      this.window.hide(); 
+    element.addEventListener('click', (event) => { 
+      if(this.window == null) {
+        this.openWindow(event);
+      } else {
+        this.window.hide(); 
+      }
     }, false );
 
     element.addEventListener('contextmenu', (event) => { 
@@ -131,8 +164,10 @@ export class App {
     this.getToolbarElement().remove();
   }
 
-  public addToDesktop() {
-    $.ajax({
+  public async addToDesktop() {
+    var app : ChildNode;
+
+    await $.ajax({
       global: false,
       type: "POST",
       url: "/my_apps/add_app_to_desktop",
@@ -141,11 +176,29 @@ export class App {
         id: this.id
       },
       success: function (html) {
-        var app = document.createElement('div');
-        app.innerHTML = html;
-        Desktop.getInstance().getElement().appendChild(app.firstChild);
+        var app_container = document.createElement('div');
+        app_container.innerHTML = html;
+        app = app_container.firstChild;
+        Desktop.getInstance().getElement().appendChild(app);
       }
     });
+
+    if(app != null) {
+      //append Listener
+      app.addEventListener('dblclick', (event) => {
+        this.openWindow(event);
+      }, false);
+
+      app.addEventListener('contextmenu', (event) => {
+        this.openWindow(event);
+      }, false);
+
+      app.addEventListener('dragstart', (event : any) => {
+        var dragElement = event.target.closest('div').id;
+        var dragAppId : number = dragElement.replace("app-", "");
+        Desktop.getInstance().setDragApp(dragAppId);
+      }, false);
+    }
   }
 
   public removeFromDesktop() {

@@ -1,7 +1,4 @@
-<div id="app-<%= app.id %>" class="app" draggable="true" 
-  ondblclick="openApp(event, <%= app.id %>, '<%= app.img_src %>', 50, 50, null);" 
-  oncontextmenu="openContextMenu(event, 'desktop_app', <%= app.id %>);"
-  ondragstart="dragApp(event)" style="left: <%= user_app['pos_x'] %>%; top: <%= user_app['pos_y'] %>%;">
+<div id="app-<%= app.id %>" class="app" draggable="true" style="left: <%= user_app['pos_x'] %>%; top: <%= user_app['pos_y'] %>%;">
   
   <img src="<%= app.img_src %>" class="icon" draggable="false" />
 

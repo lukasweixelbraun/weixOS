@@ -17,6 +17,12 @@ RUN apk add --update --no-cache \
     npm \
     yarn
 
+# Install python/pip
+ENV PYTHONUNBUFFERED=1
+RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
+RUN python3 -m ensurepip
+RUN pip3 install --no-cache --upgrade pip setuptools
+
 # Set an environment variables for rails
 ENV RAILS_ROOT="/var/www/weix_os"
 ENV SECRET_KEY_BASE=17ffad5bbab9e0939f560eb9214d62086e13aca81abd66aa66e0d23929bd65386381497c9a6fa58006b6fccf4bbcd687a2059d1821acc9eeafb4498d00e4c563

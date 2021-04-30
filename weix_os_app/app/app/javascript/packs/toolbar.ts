@@ -6,8 +6,6 @@ const toolbar : Toolbar = Toolbar.getInstance();
 var typingTimer = void 0; // void 0 for the memes
 var doneTypingInterval = 300;
 
-toolbar.getSystemTime();
-
 $(document).on("click", function() {
   toolbar.closeSystemMenu();
 });

@@ -2,7 +2,15 @@ class SystemController < ActionController::Base
   before_action :authenticate_user!
 
   def desktop
-    @apps = current_user.apps
+    
+  end
+
+  def load_apps
+    apps = current_user.apps.as_json({:include => [ :user_apps ]})
+    
+    Rails.logger.info(apps)
+
+    return render json: apps
   end
 
   def create_message

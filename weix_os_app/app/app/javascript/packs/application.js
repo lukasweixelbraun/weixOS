@@ -11,17 +11,3 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-
-// --- Disable Default Contextmenu ---
-
-if (document.addEventListener) {
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-    closeContextMenus();
-  }, false);
-} else {
-  document.attachEvent('oncontextmenu', function() {
-    window.event.returnValue = false;
-    closeContextMenus();
-  });
-}

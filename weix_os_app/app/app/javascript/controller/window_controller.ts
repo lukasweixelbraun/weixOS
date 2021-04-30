@@ -3,19 +3,26 @@ import { Desktop } from "./desktop_controller"
 export class AppWindow {
 
   private appId : number = 0;
+  private template_name : string = "";
   private pos_x : number = 0;
   private pos_y : number = 0;
   private last_state : string = "";
+  private is_open : boolean = false;
 
   private windowElement : HTMLElement = null;
   private titleBar : HTMLElement = null;
 
+  private closeWindowCallback : () => void;
 
-  constructor(id : number, pos_x : number, pos_y : number, last_state : string) {
+  constructor(id : number, template_name : string, pos_x : number, pos_y : number, last_state : string, is_open : boolean, closeWindowCallback : () => void) {
     this.appId = id;
+    this.template_name = template_name;
     this.pos_x = pos_x;
     this.pos_y = pos_y;
     this.last_state = last_state;
+    this.is_open = is_open;
+
+    this.closeWindowCallback = closeWindowCallback;
   }
 
   public getElement() {
@@ -34,42 +41,88 @@ export class AppWindow {
     return this.titleBar;
   }
 
-  public open(event) {
-    $.ajax({
+  public getButton(method : string) {
+    return this.getElement().querySelector('.app-' + method);
+  }
+
+
+  public isOpen() {
+    return this.is_open;
+  }
+
+  public async open(event) {
+    var windowElement : HTMLElement;
+    var button_close : HTMLElement;
+    var button_full : HTMLElement;
+    var button_hide : HTMLElement;
+    
+    await $.ajax({
       global: false,
       type: "POST",
       url: "/my_apps/open_window",
       dataType: 'html',
       data: {
         id: this.appId,
+        template_name: this.template_name,
         window_pos_x: this.pos_x,
         window_pos_y: this.pos_y,
         last_state: this.last_state
       },
       success: function (html) {
-        var app = document.createElement('div');
-        app.innerHTML = html;
-  
-        while(app.firstChild) {
-          Desktop.getInstance().getElement().appendChild(app.firstChild);
-        }
+        var window_container = document.createElement('div');
+        window_container.innerHTML = html;
+
+        windowElement = window_container.firstChild as HTMLElement;
+        Desktop.getInstance().getElement().appendChild(windowElement);
       }
     });
 
-    this.enableDrag(event);
+    this.windowElement = windowElement;
+    this.titleBar = windowElement.querySelector('.app-title-bar');
+    button_close = windowElement.querySelector('.app-close');
+    button_full = windowElement.querySelector('.app-fullscreen');
+    button_hide = windowElement.querySelector('.app-hide');
+
+    if(this.windowElement != undefined) {
+      this.enableDrag(event);
+    }
+
+    if(this.titleBar != undefined) {
+      this.titleBar.addEventListener('dblclick', () => {
+        this.fullscreen();
+      }, false);
+    }
+
+    if(button_close != undefined) {
+      button_close.addEventListener('click', () => {
+        this.close();
+      }, false);
+    }
+
+    if(button_full != undefined) {
+      button_full.addEventListener('click', () => {
+        this.fullscreen();
+      }, false);
+    }
+
+    if(button_hide != undefined) {
+      button_hide.addEventListener('click', () => {
+        this.hide();
+      }, false);
+    }
   }
 
   public hide() {
     this.getElement().classList.toggle('hidden');
-    this.saveState();
+    this.saveState(this.getElement(), this.appId);
   }
 
   public fullscreen() {
     this.getElement().classList.toggle('fullscreen');
-    this.saveState();
+    this.saveState(this.getElement(), this.appId);
   }
 
-  public close() {
+  public async close() {
     $.ajax({
       global: false,
       type: "POST",
@@ -77,15 +130,15 @@ export class AppWindow {
       dataType: 'json',
       data: {
         id: this.appId
-      },
-      success: function (data) {
-        this.getElement().remove();
       }
     });
+
+    this.getElement().remove();
+    this.closeWindowCallback();
   }
 
-  public saveState() {
-    var window_state = this.getElement().classList.toString();
+  public saveState(element, app_id) {
+    var window_state = element.classList.toString();
     window_state = window_state.replace(",", " ");
     window_state = window_state.replace("app-window", "");
     window_state = window_state.replace("window", "");
@@ -96,15 +149,18 @@ export class AppWindow {
       url: "/my_apps/save_window_state",
       dataType: 'json',
       data: {
-        id: this.appId,
+        id: app_id,
         last_state: window_state
       }
     });
   }
 
   private enableDrag(event) {
+    var appId = this.appId;
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     var title_bar = this.getTitleBar();
+    var element = this.getElement();
+    var saveState = this.saveState;
   
     if (title_bar != null) {
       // if present, the header is where you move the DIV from:
@@ -140,16 +196,16 @@ export class AppWindow {
       pos4 = event.clientY;
   
       // set the element's new position:
-      if((this.getElement().offsetTop - (this.getElement().offsetHeight / 2) - pos2) >= 0) {
-        this.pos_x = (this.getElement().offsetTop - pos2);
+      if((element.offsetTop - (element.offsetHeight / 2) - pos2) >= 0) {
+        this.pos_x = (element.offsetTop - pos2);
       } else {
-        this.pos_x = (this.getElement().offsetHeight / 2);
+        this.pos_x = (element.offsetHeight / 2);
       }
   
-      this.pos_y = (this.getElement().offsetLeft - pos1);
+      this.pos_y = (element.offsetLeft - pos1);
 
-      this.getElement().style.left = this.pos_y + "px";
-      this.getElement().style.top = this.pos_x + "px";
+      element.style.left = this.pos_y + "px";
+      element.style.top = this.pos_x + "px";
       
   
       // check tiling
@@ -166,19 +222,19 @@ export class AppWindow {
 
     function tiling(direction) {
       if(direction == 'top') {
-        this.getElement().classList.add('fullscreen');
+        element.classList.add('fullscreen');
       } else if(direction != 'no tiling') {
-        this.getElement().classList.add('tiling-' + direction);
+        element.classList.add('tiling-' + direction);
       } else {
         //remove fullscreen if enabled
-        if(this.getElement().classList.contains('fullscreen')) {
-          this.getElement().classList.remove('fullscreen');
+        if(element.classList.contains('fullscreen')) {
+          element.classList.remove('fullscreen');
 
-          this.getElement().style.top = (((this.getElement().offsetHeight + 25) / 2) - pos4) + "px";
-          this.getElement().style.left = pos3 + "px";
+          element.style.top = (((element.offsetHeight + 25) / 2) - pos4) + "px";
+          element.style.left = pos3 + "px";
         } else {
-          this.getElement().classList.remove('tiling-left');
-          this.getElement().classList.remove('tiling-right');
+          element.classList.remove('tiling-left');
+          element.classList.remove('tiling-right');
         }
       }
     }
@@ -193,18 +249,18 @@ export class AppWindow {
       var left = 50;
       var top = 50;
 
-      if(this.getElement().style.left.includes("px")) {
-        left = this.getElement().style.left.replace("px", "");
+      if(element.style.left.includes("px")) {
+        left = +element.style.left.replace("px", "");
         left = left / window.innerWidth * 100;
-      } else if(this.getElement().style.left.includes("%")) {
-        left = this.getElement().style.left.replace("%", "");
+      } else if(element.style.left.includes("%")) {
+        left = +element.style.left.replace("%", "");
       }
 
-      if(this.getElement().style.top.includes("px")) {
-        top = this.getElement().style.top.replace("px", "");
+      if(element.style.top.includes("px")) {
+        top = +element.style.top.replace("px", "");
         top = top / window.innerHeight * 100;
-      } else if(this.getElement().style.top.includes("%")) {
-        top = this.getElement().style.top.replace("%", "");
+      } else if(element.style.top.includes("%")) {
+        top = +element.style.top.replace("%", "");
       }
 
       $.ajax({
@@ -219,7 +275,7 @@ export class AppWindow {
         }
       });
 
-      this.saveState();
+      saveState(element, appId);
     }
   }
 }
