@@ -29,9 +29,9 @@ module MyApps
     end
 
     # desktop shortcut created, save the changes!
-    def remove_app_to_desktop
+    def remove_app_from_desktop
       user_app = current_user.user_apps.where(app_id: params[:id]).first
-      user_app.desktop_link = params[:desktop_link]
+      user_app.desktop_link = false
       user_app.save
 
       return render :json => { :success => true }
@@ -44,6 +44,22 @@ module MyApps
       user_app.desktop_link = true
       user_app.save
       return render partial: "system/app/app", locals: { app: app, user_app: user_app }
+    end
+
+    def remove_app_from_favorites
+      user_app = current_user.user_apps.where(app_id: params[:id]).first
+      user_app.toolbar_link = false
+      user_app.save
+
+      return render :json => { :success => true }
+    end
+
+    def add_app_to_favorites
+      user_app = current_user.user_apps.where(app_id: params[:id]).first
+      user_app.toolbar_link = true
+      user_app.save
+
+      return render :json => { :success => true }
     end
 
 

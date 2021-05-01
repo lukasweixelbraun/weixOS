@@ -85,6 +85,7 @@ export class AppWindow {
 
     if(this.windowElement != undefined) {
       this.enableDrag(event);
+      this.is_open = true;
     }
 
     if(this.titleBar != undefined) {
@@ -180,7 +181,7 @@ export class AppWindow {
       pos3 = event.clientX;
       pos4 = event.clientY;
   
-      document.onmouseup = closeDragElement;
+      document.onmouseup = () => { closeDragElement(appId) };
       // call a function whenever the cursor moves:
       document.onmousemove = elementDrag;
     }
@@ -239,7 +240,7 @@ export class AppWindow {
       }
     }
 
-    function closeDragElement() {
+    function closeDragElement(appId : number) {
       Desktop.getInstance().getElement().style.cursor = "default";
 
       // stop moving when mouse button is released:
@@ -269,7 +270,7 @@ export class AppWindow {
         url: "/my_apps/update_window_pos",
         dataType: 'json',
         data: {
-          id: this.appId,
+          id: appId,
           window_pos_x: left,
           window_pos_y: top
         }

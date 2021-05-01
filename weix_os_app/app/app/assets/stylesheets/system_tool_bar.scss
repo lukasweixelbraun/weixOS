@@ -100,7 +100,22 @@
   box-shadow: inset 0 0 3px $beige-pitch-black;
   background-color: $beige-darker;
   color: $orange-light;
-  padding: 10px;
+  padding: 2px;
+}
+
+.system-tool-bar > .system-menu > .menu-box > .menu-left > #app-search-result > button > img {
+  height: 100%;
+  width: auto;
+  float: left;
+}
+
+.system-tool-bar > .system-menu > .menu-box > .menu-left > #app-search-result > button >.app-name {
+  height: 100%;
+  text-align: center;
+  display: flex;
+  //justify-content: center; /* align horizontal */
+  padding: 0px 6px;
+  align-items: center; /* align vertical */
 }
 
 .system-tool-bar > .system-menu > .menu-box > .menu-left > #app-search-result > button:hover {

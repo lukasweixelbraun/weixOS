@@ -104,6 +104,11 @@ export class Desktop {
 
   public getApp(id : number) {
     var app : App = this.apps.find((a : App) => a.getId() == id);
+
+    if(app == undefined || app == null) {
+      //TODO fetch app from db!
+    }
+
     return app;
   }
 

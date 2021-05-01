@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     post 'create_sym_link' => 'app#create_sym_link', as: :create_sym_link
     post 'open_context_menu' => 'app#open_context_menu', as: :open_context_menu
     post 'add_app_to_desktop' => 'app#add_app_to_desktop', as: :add_app_to_desktop
+    post 'remove_app_from_desktop' => 'app#remove_app_from_desktop', as: :remove_app_from_desktop
+    post 'add_app_to_favorites' => 'app#add_app_to_favorites', as: :add_app_to_favorites
+    post 'remove_app_from_favorites' => 'app#remove_app_from_favorites', as: :remove_app_from_favorites
     post 'search' => 'app#search', as: :search
 
     # window save_window_state

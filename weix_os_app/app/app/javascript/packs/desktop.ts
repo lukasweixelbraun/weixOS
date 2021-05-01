@@ -14,7 +14,7 @@ $(document).on("dragover", '#desktop', function(event) {
 });
 
 //TODO
-function createSystemMessage(type : string, title : string, message : string, inputs : any) {
+ function createSystemMessage (type, title, message, inputs) {
   desktop.createSystemMessage(type, title, message, inputs);
 }
 

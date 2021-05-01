@@ -1,6 +1,6 @@
 <% apps.each do |app| %>
-  <button data-app-id="<%= app.id %>">
+  <button data-app-id="<%= app.id %>" class="app-search-result">
     <img src="<%= app.img_src %>" class="icon" draggable="false" />
-    <%= app.name %>
+    <span class="app-name"><%= app.name %></span>
   </button>
 <% end %>

@@ -65,6 +65,12 @@ export class App {
   }
 
   public openWindow(event) {
+    if(this.window != null && this.window != undefined) {
+      if(this.window.isOpen() == true) {
+        return;
+      }
+    }
+
     this.window = new AppWindow(this.id, this.template_name, 50, 50, "", false, this.closeWindowCallback);
     this.window.open(event);
     this.addToToolbar();
@@ -124,7 +130,7 @@ export class App {
     });
   }
 
-  public addToToolbar() {
+  public async addToToolbar() {
     if(this.getToolbarElement() != undefined) {
       return;
     }
@@ -157,10 +163,36 @@ export class App {
       Desktop.getInstance().openContextMenu(event, 'toolbar_app', this.id); 
     }, false );
 
+    await $.ajax({
+      global: false,
+      type: "POST",
+      url: "/my_apps/add_app_to_favorites",
+      dataType: 'html',
+      data: {
+        id: this.id
+      },
+      success: function (html) {
+        // Nix
+      }
+    });
+
     toolbar.appendChild(element);
   }
 
-  public removeFromToolbar() {
+  public async removeFromToolbar() {
+    await $.ajax({
+      global: false,
+      type: "POST",
+      url: "/my_apps/remove_app_from_favorites",
+      dataType: 'html',
+      data: {
+        id: this.id
+      },
+      success: function (html) {
+        // Nix
+      }
+    });
+
     this.getToolbarElement().remove();
   }
 
@@ -190,7 +222,7 @@ export class App {
       }, false);
 
       app.addEventListener('contextmenu', (event) => {
-        this.openWindow(event);
+        Desktop.getInstance().openContextMenu(event, 'desktop_app', this.id);
       }, false);
 
       app.addEventListener('dragstart', (event : any) => {
@@ -201,18 +233,20 @@ export class App {
     }
   }
 
-  public removeFromDesktop() {
-    $.ajax({
+  public async removeFromDesktop() {
+    await $.ajax({
       global: false,
       type: "POST",
-      url: "/my_apps/remove_app_to_desktop",
+      url: "/my_apps/remove_app_from_desktop",
       dataType: 'json',
       data: {
         id: this.id
       },
       success: function (data) {
-        this.getElement().remove();
+
       }
     });
+
+    this.getElement().remove();
   }
 }

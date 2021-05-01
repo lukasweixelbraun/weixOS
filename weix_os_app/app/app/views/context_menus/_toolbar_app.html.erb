@@ -1,3 +1,21 @@
-<button onclick="desktopLink(event, <%= app.id %>, true);">
-  Desktop Verknüpfung hinzufügen
-</button>
+<% user_app = app.user_apps.where(user_id: current_user.id).first %>
+
+<% if user_app['desktop_link'] == true %>
+  <button class="context-menue-item" data-app-id="<%= app.id %>" data-context-menue=1>
+    Desktop Verknüpfung löschen
+  </button>
+<% else %>
+  <button class="context-menue-item" data-app-id="<%= app.id %>" data-context-menue=0>
+    Desktop Verknüpfung hinzufügen
+  </button>
+<% end %>
+
+<% if user_app['toolbar_link'] == true %>
+  <button class="context-menue-item" data-app-id="<%= app.id %>" data-context-menue=3>
+    Von Favoriten löschen
+  </button>
+<% else %>
+  <button class="context-menue-item" data-app-id="<%= app.id %>" data-context-menue=2>
+    Zu Favoriten hinzufügen
+  </button>
+<% end %>
