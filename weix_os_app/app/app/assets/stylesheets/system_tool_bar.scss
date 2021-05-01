@@ -207,6 +207,11 @@
 .system-information > .element {
   float: right;
   min-width: $system-toolbar-height - 18px;
+
+  text-align: center;
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
 }
 
 .system-information > .element > .time {
@@ -216,11 +221,13 @@
   width: 100%;
 }
 
-.system-information > .element > .info {
+.system-information > .element > abbr > .info {
   background-color: $beige-light;
   border: 1px solid $beige-pitch-black;
-  width: 100%;
+  width: $system-toolbar-height - 18px;
+  margin: 0px 6px;
   height: 100%;
+  cursor: default;
 }
 
 .vr {
