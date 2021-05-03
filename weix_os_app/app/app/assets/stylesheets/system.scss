@@ -40,13 +40,27 @@ button {
   padding: 35px;
 }
 
+.blur {
+  -webkit-filter: blur(1.2rem);
+  -moz-filter: blur(1.2rem);
+  -o-filter: blur(1.2rem);
+  -ms-filter: blur(1.2rem);
+  filter: blur(1.2rem);
+  height: 100vh;
+}
+
 #system-message-overlay {
   position: absolute;
   z-index: $system-message-container-z-index;
-  height: 100vh;
+  -webkit-filter: blur(1.8rem);
+  -moz-filter: blur(1.8rem);
+  -o-filter: blur(1.8rem);
+  -ms-filter: blur(1.8rem);
+  filter: blur(1.8rem);
   width: 100vw;
-  opacity: 0.4;
-  background-color: $beige-dark;
+  height: 100vh;
+  background-color: $brown;
+  opacity: 0.36;
 }
 
 #system-message-overlay.hidden {
@@ -55,12 +69,12 @@ button {
 
 .system-message {
   z-index: $system-message-z-index;
-  position: relative;
+  position: absolute;
   top: 50%;
   left: 50%;
   width: 20vw;
   transform: translate(-50%, -50%);
-  opacity: 0.95;
+  opacity: 0.86;
   background-color: $beige-darker;
 
   -moz-box-shadow: 0 0 5px $beige-pitch-black;

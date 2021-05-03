@@ -1,6 +1,7 @@
 import { ContextMenu, ContextMenuFunctions } from "../controller/context_menu_controller";
 import { Desktop } from "../controller/desktop_controller"
 import { Toolbar } from "../controller/toolbar_controller"
+import { getSystemMessages } from "../controller/system_message_controller"
 
 const desktop : Desktop = Desktop.getInstance();
 const toolbar : Toolbar = Toolbar.getInstance();
@@ -48,6 +49,15 @@ $(document).on("contextmenu", '.app-search-result', function(event) {
   Desktop.getInstance().openContextMenu(event, 'toolbar_app', appId);
 });
 
+$(document).on("click", '.open-system-message', function(event) {
+  event.stopPropagation();
+  var element = event.target.closest('button');
+  const { systemMessage } = element.dataset;
+  desktop.createSystemMessage(getSystemMessages(systemMessage));
+});
+
+
+// Analog System Messages machen?
 $(document).on("click", '.context-menue-item', function(event) {
   event.stopPropagation();
   var element = event.target.closest('button');

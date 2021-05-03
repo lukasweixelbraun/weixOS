@@ -13,15 +13,12 @@ $(document).on("dragover", '#desktop', function(event) {
   event.preventDefault();
 });
 
-//TODO
- function createSystemMessage (type, title, message, inputs) {
-  desktop.createSystemMessage(type, title, message, inputs);
-}
-
-function closeContextMenus() {
-  desktop.closeContextMenus();
-}
-
-function dismissSystemMessage() {
+$(document).on("click", '#system-message-cancel', function(event) {
+  event.preventDefault();
   desktop.dismissSystemMessage();
-}
+});
+
+$(document).on("click", '#system-message-ok', function(event) {
+  event.preventDefault();
+  desktop.dismissSystemMessage();
+});

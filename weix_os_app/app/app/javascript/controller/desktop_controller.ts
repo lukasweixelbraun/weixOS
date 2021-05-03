@@ -1,4 +1,6 @@
+import { visitFunctionBody } from "typescript";
 import { App } from "./app_controller"
+import { SystemMessage } from "./system_message_controller";
 import { AppWindow } from "./window_controller";
 
 $.ajaxSetup({
@@ -128,7 +130,7 @@ export class Desktop {
     return this.desktopElement;
   }
 
-  public createSystemMessage(type : string, title : string, message : string, inputs : any) {
+  public createSystemMessage(sysMessage : SystemMessage) {
     /*
       inputs = [{
         id: "inp1",
@@ -152,26 +154,29 @@ export class Desktop {
       url: "/system/create_message",
       dataType: 'html',
       data: {
-        type: type,
-        title: title,
-        message: message,
-        inputs: inputs
+        type: sysMessage.type,
+        title: sysMessage.title,
+        message: sysMessage.message
       },
       success: function (html) {
+        var body = document.getElementsByTagName('body')[0];
         var desktop = document.getElementById('desktop');
 
         var systemMessage = document.createElement('div');
         systemMessage.classList.add('system-message');
         systemMessage.innerHTML = html;
 
-        desktop.appendChild(systemMessage);
+        body.appendChild(systemMessage);
 
+        desktop.classList.toggle('blur');
         document.getElementById('system-message-overlay').classList.toggle('hidden');
       }
     });
   }
 
   public dismissSystemMessage() {
+    var desktop = document.getElementById('desktop');
+    desktop.classList.toggle('blur');
     document.getElementById('system-message-overlay').classList.toggle('hidden');
     document.querySelectorAll('.system-message').forEach(e => e.remove());
   }
