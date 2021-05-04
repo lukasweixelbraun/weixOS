@@ -6,11 +6,12 @@ class SystemController < ActionController::Base
   end
 
   def load_apps
-    apps = current_user.apps.as_json({:include => [ :user_apps ]})
+    apps = App.all
+    user_app_data = current_user.user_apps
     
-    Rails.logger.info(apps)
+    Rails.logger.info({apps: apps.to_a, user_data: user_app_data.to_a})
 
-    return render json: apps
+    return render json: {apps: apps.to_a, user_data: user_app_data.to_a}
   end
 
   def create_message

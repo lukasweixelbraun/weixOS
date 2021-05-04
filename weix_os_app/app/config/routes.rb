@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   root to: "system#desktop"
 
+  get 'users/guest_sign_in' => 'application#guest_sign_in', as: :guest_sign_in
+
   post 'system/create_message' => 'system#create_message', as: :create_message
   post 'system/load_apps' => 'system#load_apps', as: :load_apps
 

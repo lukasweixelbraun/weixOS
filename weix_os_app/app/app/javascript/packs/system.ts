@@ -68,9 +68,9 @@ $(document).on("click", '.context-menue-item', function(event) {
     app.addToDesktop();
   } else if(contextMenue == ContextMenuFunctions.removeFromDesktop) {
     app.removeFromDesktop();
-  } else if(contextMenue == ContextMenuFunctions.addToToolbar) {
-    app.addToToolbar();
-  } else if(contextMenue == ContextMenuFunctions.removeFromToolbar) {
-    app.removeFromToolbar();
+  } else if(contextMenue == ContextMenuFunctions.addToFavorites) {
+    app.addToFavorites();
+  } else if(contextMenue == ContextMenuFunctions.removeFromFavorites) {
+    app.removeFromFavorites();
   }
 });

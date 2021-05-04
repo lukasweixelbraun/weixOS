@@ -29,50 +29,53 @@ export class Desktop {
       dataType: 'json',
       success: function (data) {
         if(data !== undefined) {
-          data.forEach(app_data => {
-            var user_settings = app_data['user_apps'][0];
+          data['apps'].forEach(app_data => {
+            var user_settings = data['user_data'].find((user_data : any) => app_data.id == user_data.app_id);
             var pos_x = 50;
             var pos_y = 50;
             var desktop_link = false;
             var toolbar_link = false;
 
             if(user_settings != undefined) {
-              pos_x = user_settings['pos_x'];
-              pos_y = user_settings['pos_y'];
-              desktop_link = user_settings['desktop_link'];
-              toolbar_link = user_settings['toolbar_link'];
+              pos_x = user_settings.pos_x;
+              pos_y = user_settings.pos_y;
+              desktop_link = user_settings.desktop_link;
+              toolbar_link = user_settings.toolbar_link;
             }
 
-            var app = new App(app_data['id'], 
+            var app = new App(app_data.id, 
                     pos_x, pos_y, 
-                    app_data['name'], 
-                    app_data['template_name'], 
-                    app_data['img_src'], 
+                    app_data.name, 
+                    app_data.template_name, 
+                    app_data.img_src, 
                     desktop_link,
                     toolbar_link);
 
             var window : AppWindow = null;
 
             if(user_settings != undefined) {
-              var opened : boolean = user_settings['is_opened'];
+              var opened : boolean = user_settings.is_opened;
 
               if(opened == true) {
-                window = new AppWindow(app_data['id'],
-                  app_data['template_name'], 
-                  user_settings['window_pos_x'],
-                  user_settings['window_pos_y'],
-                  user_settings['last_state'],
+                window = new AppWindow(app_data.id,
+                  app_data.template_name, 
+                  user_settings.window_pos_x,
+                  user_settings.window_pos_y,
+                  user_settings.last_state,
                   opened,
                   app.getCloseWindowCallback()
                 );
-
-                window.open(event);
-                app.addToToolbar();
               }
             }
 
-            if(window != undefined) {
-              app.setWindow(window);
+            if(window != null) {
+              app.openWindow(event);
+            } else if(app.hasToolbarLink() == true) {
+              app.addToToolbar();
+            }
+
+            if(app.hasDesktopLink() == true) {
+              app.addToDesktop();
             }
 
             Desktop.getInstance().appendApp(app);
@@ -83,14 +86,6 @@ export class Desktop {
   }
 
   public appendApp(app : App) {
-    if(app.hasDesktopLink() == true) {
-      app.addToDesktop();
-    }
-
-    if(app.hasToolbarLink() == true) {
-      app.addToToolbar();
-    }
-
     this.apps.push(app);
   }
 

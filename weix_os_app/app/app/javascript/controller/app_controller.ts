@@ -130,7 +130,7 @@ export class App {
     });
   }
 
-  public async addToToolbar() {
+  public addToToolbar() {
     if(this.getToolbarElement() != undefined) {
       return;
     }
@@ -163,6 +163,10 @@ export class App {
       Desktop.getInstance().openContextMenu(event, 'toolbar_app', this.id); 
     }, false );
 
+    toolbar.appendChild(element);
+  }
+
+  public async addToFavorites() {
     await $.ajax({
       global: false,
       type: "POST",
@@ -176,10 +180,14 @@ export class App {
       }
     });
 
-    toolbar.appendChild(element);
+    this.toolbar_link = true;
+
+    if(this.getToolbarElement() == undefined) {
+      this.addToToolbar();
+    }
   }
 
-  public async removeFromToolbar() {
+  public async removeFromFavorites() {
     await $.ajax({
       global: false,
       type: "POST",
@@ -193,6 +201,14 @@ export class App {
       }
     });
 
+    this.toolbar_link = false;
+
+    if(this.getToolbarElement() != undefined && (this.window == null || this.window?.isOpen() == false)) {
+      this.removeFromToolbar();
+    }
+  }
+
+  public removeFromToolbar() {
     this.getToolbarElement().remove();
   }
 
@@ -230,6 +246,8 @@ export class App {
         var dragAppId : number = dragElement.replace("app-", "");
         Desktop.getInstance().setDragApp(dragAppId);
       }, false);
+
+      this.desktop_link = true;
     }
   }
 
@@ -246,6 +264,8 @@ export class App {
 
       }
     });
+
+    this.desktop_link = false;
 
     this.getElement().remove();
   }

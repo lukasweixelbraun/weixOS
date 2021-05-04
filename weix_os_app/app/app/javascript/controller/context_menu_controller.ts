@@ -1,8 +1,8 @@
 export enum ContextMenuFunctions {
   addToDesktop,
   removeFromDesktop,
-  addToToolbar,
-  removeFromToolbar
+  addToFavorites,
+  removeFromFavorites
 }
 
 export class ContextMenu {
