@@ -7,6 +7,8 @@ $.ajaxSetup({
   }
 });
 
+
+
 export class Toolbar {
 
   private static instance : Toolbar;
@@ -65,8 +67,7 @@ export class Toolbar {
       }
     });
 
-    Turbolinks.clearCache();
-    Turbolinks.visit("http://localhost:3000/", { "action":"replace" });
+    window.location.href = "/"
   }
 
   public closeSystemMenu() {

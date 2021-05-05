@@ -1,4 +1,3 @@
-import { visitFunctionBody } from "typescript";
 import { App } from "./app_controller"
 import { SystemMessage } from "./system_message_controller";
 import { AppWindow } from "./window_controller";
@@ -21,8 +20,8 @@ export class Desktop {
 
   }
 
-  public loadApps(event) {
-    $.ajax({
+  public async loadApps(event) {
+    await $.ajax({
       global: false,
       type: "post",
       url: "/system/load_apps",
@@ -83,6 +82,13 @@ export class Desktop {
         }
       }
     });
+
+    // add drop event listener
+    this.getElement().addEventListener('drop', (event : any) => {
+      var app = this.getDragApp();
+      app.move(event.clientX, event.clientY);
+    }, false);
+    
   }
 
   public appendApp(app : App) {
@@ -90,12 +96,10 @@ export class Desktop {
   }
 
   public getDragApp() {
-    console.log(this.dragElementId);
     return this.getApp(this.dragElementId);
   }
 
   public setDragApp(id : number) {
-    console.log(id);
     this.dragElementId = id;
   }
 

@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(version: 2021_04_21_205130) do
   create_table "t_app2users", id: :serial, force: :cascade do |t|
     t.integer "app_id", null: false
     t.integer "user_id", null: false
-    t.decimal "pos_x", null: false
-    t.decimal "pos_y", null: false
-    t.decimal "window_pos_x", null: false
-    t.decimal "window_pos_y", null: false
+    t.decimal "pos_x", default: "50.0"
+    t.decimal "pos_y", default: "50.0"
+    t.decimal "window_pos_x", default: "0.0"
+    t.decimal "window_pos_y", default: "0.0"
     t.boolean "is_opened", default: false
     t.boolean "desktop_link", default: false
     t.boolean "toolbar_link", default: false

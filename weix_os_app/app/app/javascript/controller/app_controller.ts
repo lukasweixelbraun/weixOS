@@ -115,7 +115,7 @@ export class App {
     }
 
     app.style.left = this.pos_x + "%";
-    app.style.top = top + "%";
+    app.style.top = this.pos_y + "%";
 
     $.ajax({
       global: false,
@@ -124,7 +124,7 @@ export class App {
       dataType: 'json',
       data: {
           id: this.id,
-          pos_x: this.pos_y,
+          pos_x: this.pos_x,
           pos_y: this.pos_y
       }
     });
