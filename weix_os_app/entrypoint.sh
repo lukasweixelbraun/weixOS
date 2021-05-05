@@ -7,12 +7,13 @@ bundle install
 
 # db migrate
 bin/rake db:migrate
-
-# compile webpacker
-bin/rails webpacker:compile
+bin/rake db:setup
 
 npm install
 yarn install
+# compile webpacker
+
+bin/rails webpacker:compile
 
 # Generate Assets
 bin/rake assets:clobber
