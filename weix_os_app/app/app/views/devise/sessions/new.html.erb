@@ -1,16 +1,16 @@
 <div class="window devise-window">
-  <h2>Anmelden</h2>
+  <h2 class="is-medium">Anmelden</h2>
   <br />
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
       <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "e.g. lukas@example.com", class: "input" %>
     </div>
 
     <div class="field">
       <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "current-password" %>
+      <%= f.password_field :password, autocomplete: "current-password", placeholder: "************", class: "input" %>
     </div>
 
     <% if devise_mapping.rememberable? %>
@@ -23,10 +23,15 @@
     <br />
 
     <div class="actions">
-      <%= f.submit "Log in" %>
+      <%= f.submit "Log in", class: "button is-dark" %>
 
       <%= link_to "guest_sign_in" do %>
-        <button>Als Gast</button>
+        <button class="button is-dark is-light">
+          <span class="icon is-medium">
+            <i class="fab fa-github"></i>
+          </span>
+          <span>Als Gast</span>
+        </button>
       <%end%>
     </div>
   <% end %>

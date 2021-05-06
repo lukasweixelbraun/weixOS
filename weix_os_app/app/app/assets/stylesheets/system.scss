@@ -97,13 +97,18 @@ button {
 }
 
 .system-message > .message > .system-message-button-bar {
-  padding: 10px;
+  padding: 0px;
 }
 
 .system-message > .message > .system-message-button-bar > button {
   margin: 0px;
-  width: calc(50% - 3px);
+  width: calc(50% - 2.5px);
   background-color: $beige-darker;
   color: $orange-light;
   border: none;
+  height: 50px;
+}
+
+.system-message > .message > .system-message-button-bar > button:hover {
+  background-color: $beige-pitch-black;
 }

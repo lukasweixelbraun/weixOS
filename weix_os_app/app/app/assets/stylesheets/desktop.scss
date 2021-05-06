@@ -18,11 +18,19 @@
   margin: 10px;
 }
 
+#desktop > .app:focus {
+  border: dashed 1px $beige-dark;
+}
+
 #desktop > .app > .icon {
   width: $app-size / 2;
   height: $app-size / 2;
   margin: 0px $app-size / 4;
   background-color: $beige-light;
+}
+
+#desktop > .app > .icon:hover {
+  transform: scale(105%);
 }
 
 #desktop > .app > .text {

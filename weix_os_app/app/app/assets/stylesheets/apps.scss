@@ -31,12 +31,24 @@
   background-color: $red;
 }
 
+.window.app-window > .app-title-bar > .app-close:hover {
+  transform: scale(105%);
+}
+
 .window.app-window > .app-title-bar > .app-fullscreen {
   background-color: $orange-light;
 }
 
+.window.app-window > .app-title-bar > .app-fullscreen:hover {
+  transform: scale(105%);
+}
+
 .window.app-window > .app-title-bar > .app-hide {
   background-color: $green-light;
+}
+
+.window.app-window > .app-title-bar > .app-hide:hover {
+  transform: scale(105%);
 }
 
 .window.app-window > .app-body {

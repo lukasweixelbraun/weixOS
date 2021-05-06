@@ -30,8 +30,8 @@
 
 .system-tool-bar > .system-menu > button {
   padding: 0px;
-  border-radius: 0px;
-  border: 0px;
+  border-radius: 0%;
+  border: none;
   height: $system-toolbar-height;
   width: $system-toolbar-height;
   background-color: $beige-darker;
@@ -41,17 +41,22 @@
 .system-tool-bar > .system-menu > button > .icon {
   width: 100%;
   height: 100%;
+  border-radius: 100%;
+  color: $beige-lighter;
+  font-size: 1.6rem;
 }
 
 .system-tool-bar > .system-menu > button:hover {
   background-color: $beige-black;
+  color: $beige-light;
+  font-size: 2rem;
 }
 
 .system-tool-bar > .system-menu > .menu-box {
-  position: relative;
+  position: absolute;
   height: $system-menu-height;
-  width: $system-menu-width;
-  top: calc(-55vh - 48px);
+  min-width: $system-menu-width;
+  bottom: $system-toolbar-height;
   background-color: $beige-black;
   padding: 15px;
   color: $beige-light;
@@ -133,6 +138,11 @@
   width: 100%;
 }
 
+.system-tool-bar > .system-menu > .menu-box > .menu-right > .current-user > .image {
+  transform: translateX(-50%);
+  left: 50%;
+}
+
 .system-tool-bar > .system-menu > .menu-box > .menu-right > button {
   border-radius: 0px;
   width: 100%;
@@ -202,6 +212,10 @@
   border-radius: 6px;
 }
 
+.system-pinned-applications > .element > .app > .icon:hover {
+  transform: scale(105%);
+}
+
 // --- right side of the system toolbar ---
 
 .system-information > .element {
@@ -219,13 +233,17 @@
   font-weight: 900;
   display: inline-block;
   width: 100%;
+  padding: 3px 10px;
+}
+
+.system-information > .element > .time:hover {
+  cursor: pointer;
+  background-color: $beige-pitch-black;
+  box-shadow: $beige-pitch-black 0px 0px 1px 1px;
 }
 
 .system-information > .element > abbr > .info {
-  background-color: $beige-light;
-  border: 1px solid $beige-pitch-black;
-  width: $system-toolbar-height - 18px;
-  margin: 0px 6px;
+  color: $beige-light;
   height: 100%;
   cursor: default;
 }
