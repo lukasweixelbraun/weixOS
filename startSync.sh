@@ -2,6 +2,6 @@
 
 set -e
 
-nohup ./system_sync/liveDataSync.sh &
+nohup ./liveDataSync.sh &
 
-nohup ./system_sync/upgradableSync.sh &
+nohup ./upgradableSync.sh &

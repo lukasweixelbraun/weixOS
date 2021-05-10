@@ -12,9 +12,9 @@ do
 
 	IFS=';' read -r -a array <<< "$LANDSCAPE_INFO"
 
-	echo "${array[0]}" > ../system_data/temp.txt
-	echo "${array[1]}" > ../system_data/memory.txt
-	echo "System CPU: $CPU_INFO%" > ../system_data/cpu.txt 
+	echo "${array[0]}" > ./system_data/temp.txt
+	echo "${array[1]}" > ./system_data/memory.txt
+	echo "System CPU: $CPU_INFO%" > ./system_data/cpu.txt 
 	
 	sleep 5
 done
