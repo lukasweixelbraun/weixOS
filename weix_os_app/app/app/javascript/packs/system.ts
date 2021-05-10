@@ -1,11 +1,10 @@
-import { ContextMenu, ContextMenuFunctions } from "../controller/context_menu_controller";
+import { ContextMenuFunctions } from "../controller/context_menu_controller";
 import { Desktop } from "../controller/desktop_controller"
 import { Toolbar } from "../controller/toolbar_controller"
 import { getSystemMessages } from "../controller/system_message_controller"
 
 const desktop : Desktop = Desktop.getInstance();
 const toolbar : Toolbar = Toolbar.getInstance();
-const context_menu : ContextMenu = ContextMenu.getInstance();
 
 // --- Disable Default Contextmenu ---
 

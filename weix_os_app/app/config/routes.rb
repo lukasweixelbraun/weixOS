@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get 'users/guest_sign_in' => 'application#guest_sign_in', as: :guest_sign_in
 
+  get 'system/fetch_system_info' => 'system#fetch_system_info', as: :fetch_system_info
   post 'system/create_message' => 'system#create_message', as: :create_message
   post 'system/load_apps' => 'system#load_apps', as: :load_apps
 

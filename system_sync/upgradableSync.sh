@@ -8,5 +8,5 @@ do
 	# Files to Upgrade
 	echo "Upgradable Packages: $UPGRADABLE_PACKAGES" > ../system_data/upgradable.txt
 
-	sleep 900
+	sleep 30
 done

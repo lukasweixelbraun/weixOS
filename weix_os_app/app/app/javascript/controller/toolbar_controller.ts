@@ -1,4 +1,3 @@
-import Turbolinks from "turbolinks"
 import * as moment from "moment";
 
 $.ajaxSetup({
@@ -7,14 +6,13 @@ $.ajaxSetup({
   }
 });
 
-
-
 export class Toolbar {
 
   private static instance : Toolbar;
 
   private constructor() {
     setInterval(this.getSystemTime, 2000);
+    setInterval(this.getSystemInfo, 3000);
   }
 
   public static getInstance() {
@@ -53,15 +51,51 @@ export class Toolbar {
     }
   }
 
+  public async getSystemInfo() {
+    var cpu_element = document.getElementById('cpu_element');
+    var temp_element = document.getElementById('temp_element');
+    var memory_element = document.getElementById('memory_element');
+    var upgradable_element = document.getElementById('upgradable_element');
+
+    var cpu;
+    var temp;
+    var memory;
+    var upgradable;
+
+    await $.ajax({
+      global: false,
+      type: "GET",
+      url: "/system/fetch_system_info",
+      dataType: 'json',
+      success: function (data) {
+        cpu = data['cpu'];
+        temp = data['temp'];
+        memory = data['memory'];
+        upgradable = data['upgradables'];
+      }
+    });
+
+    if(cpu != undefined && cpu != null) {
+      cpu_element.title = cpu;
+    }
+    if(temp != undefined && temp != null) {
+      temp_element.title = temp;
+    }
+    if(memory != undefined && memory != null) {
+      memory_element.title = memory;
+    }
+    if(upgradable != undefined && upgradable != null) {
+      upgradable_element.title = upgradable;
+    }
+    
+  }
+
   public async logOut() {
     await $.ajax({
       global: false,
       type: "DELETE",
       url: "/users/sign_out",
       dataType: 'html',
-      headers: {
-        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-      },
       success: function (html) {
         console.log("Good Bye!");
       }

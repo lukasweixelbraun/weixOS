@@ -1,8 +1,19 @@
 class SystemController < ActionController::Base
+  include SystemInfoHelper
+
   before_action :authenticate_user!
 
   def desktop
     
+  end
+
+  def fetch_system_info
+    return render json: {
+      cpu: SystemInfoHelper.cpu_usage(),
+      memory: SystemInfoHelper.memory_usage(),
+      temp: SystemInfoHelper.temperature(),
+      upgradables: SystemInfoHelper.upgradables()
+    }
   end
 
   def load_apps
