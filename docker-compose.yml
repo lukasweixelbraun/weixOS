@@ -19,6 +19,7 @@ services:
       - "3000:3000"
     volumes:
       - ./weix_os_app/app:/var/www/weix_os
+      - ./system_data:/var/www/weix_os/system_info
       - /mnt/live-drive:/var/www/weix_os/data
     env_file: .env
     networks:
