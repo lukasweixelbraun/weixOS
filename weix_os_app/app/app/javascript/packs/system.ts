@@ -21,11 +21,13 @@ window.addEventListener('contextmenu', function(e) {
 document.addEventListener('click', function(e) {
   e.preventDefault();
   desktop.closeContextMenus();
+  toolbar.cloesDetailedSystemInfo();
 }, false);
 
 window.addEventListener('click', function(e) {
   e.preventDefault();
   desktop.closeContextMenus();
+  toolbar.cloesDetailedSystemInfo();
 }, false);
 
 window.addEventListener("load", (event) => {
@@ -55,6 +57,10 @@ $(document).on("click", '.open-system-message', function(event) {
   desktop.createSystemMessage(getSystemMessages(systemMessage));
 });
 
+$(document).on("click", '#system-time', function(event) {
+  event.stopPropagation();
+  toolbar.toggleDetailedSystemInfo();
+});
 
 // Analog System Messages machen?
 $(document).on("click", '.context-menue-item', function(event) {

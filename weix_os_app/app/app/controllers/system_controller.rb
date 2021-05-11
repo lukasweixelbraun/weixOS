@@ -11,6 +11,7 @@ class SystemController < ActionController::Base
     return render json: {
       cpu: SystemInfoHelper.cpu_usage(),
       memory: SystemInfoHelper.memory_usage(),
+      swap: SystemInfoHelper.swap_usage(),
       temp: SystemInfoHelper.temperature(),
       upgradables: SystemInfoHelper.upgradables()
     }

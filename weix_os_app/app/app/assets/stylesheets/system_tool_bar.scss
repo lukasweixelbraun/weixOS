@@ -62,10 +62,6 @@
   color: $beige-light;
 }
 
-.system-tool-bar > .system-menu > .menu-box.hidden {
-  display: none;
-}
-
 .system-tool-bar > .system-menu > .menu-box > .vr {
   float: left !important;
   margin: 0px 15px !important;
@@ -90,12 +86,12 @@
   padding: 0px 10px;
 }
 
-.system-tool-bar > .system-menu > .menu-box > .menu-left > #app-search-result {
+#app-search-result {
   height: calc(100% - 42px - 5px);
   width: 100%;
 }
 
-.system-tool-bar > .system-menu > .menu-box > .menu-left > #app-search-result > button {
+#app-search-result > button {
   border-radius: 0px;
   width: 100%;
   height: $system-toolbar-height;
@@ -108,13 +104,13 @@
   padding: 2px;
 }
 
-.system-tool-bar > .system-menu > .menu-box > .menu-left > #app-search-result > button > img {
+#app-search-result > button > img {
   height: 100%;
   width: auto;
   float: left;
 }
 
-.system-tool-bar > .system-menu > .menu-box > .menu-left > #app-search-result > button >.app-name {
+#app-search-result > button >.app-name {
   height: 100%;
   text-align: center;
   display: flex;
@@ -123,7 +119,7 @@
   align-items: center; /* align vertical */
 }
 
-.system-tool-bar > .system-menu > .menu-box > .menu-left > #app-search-result > button:hover {
+#app-search-result > button:hover {
   background-color: $beige-black;
 }
 
@@ -240,6 +236,16 @@
   cursor: pointer;
   background-color: $beige-pitch-black;
   box-shadow: $beige-pitch-black 0px 0px 1px 1px;
+  border-bottom: 2px solid $red;
+  transform: translateY(1px);
+}
+
+.system-information > .element > .time:focus {
+  cursor: pointer;
+  background-color: $beige-pitch-black;
+  box-shadow: $beige-pitch-black 0px 0px 1px 1px;
+  border-bottom: 2px solid $red;
+  transform: translateY(1px);
 }
 
 .system-information > .element > abbr > .info {
@@ -254,4 +260,147 @@
   border-left: 1px solid $beige-pitch-black;
   float: right;
   margin: 0px 8px;
+}
+
+#detailed-system-info {
+  width: 600px;
+  background-color: $beige-darker;
+  position: absolute;
+  bottom: $system-toolbar-height + 10px;
+  right: 10px;
+  color: $beige-light;
+}
+
+#detailed-system-info > .hardware-monitor {
+  width: 50%;
+  float: left;
+  padding: 10px;
+}
+
+#detailed-system-info > .hardware-monitor > .hardware-entry {
+  padding: 10px;
+  margin: 15px;
+  background-color: $beige-dark;
+}
+
+.hardware-monitor > .hardware-entry > progress {
+  width: 100%;
+}
+
+#temp_progress_container {
+  progress::-moz-progress-bar {
+    color: $yellow;
+  }
+  
+  progress {
+    border: none;
+    background: $beige-darker;
+    color: $yellow;
+  }
+  
+  progress::-webkit-progress-value {
+    background: $yellow;
+  }
+  
+  progress::-moz-progress-bar {
+    background: $yellow;
+  }
+  
+  progress::-webkit-progress-value {
+    background: $yellow;
+  }
+  
+  progress::-webkit-progress-bar {
+    background: $yellow;
+  }
+}
+
+#memory_progress_container {
+  progress::-moz-progress-bar {
+    color: $red;
+  }
+  
+  progress {
+    border: none;
+    background: $beige-darker;
+    color: $red;
+  }
+  
+  progress::-webkit-progress-value {
+    background: $red;
+  }
+  
+  progress::-moz-progress-bar {
+    background: $red;
+  }
+  
+  progress::-webkit-progress-value {
+    background: $red;
+  }
+  
+  progress::-webkit-progress-bar {
+    background: $red;
+  }
+}
+
+#swap_progress_container {
+  progress::-moz-progress-bar {
+    color: $orange-light;
+  }
+  
+  progress {
+    border: none;
+    background: $beige-darker;
+    color: $orange-light;
+  }
+  
+  progress::-webkit-progress-value {
+    background: $orange-light;
+  }
+  
+  progress::-moz-progress-bar {
+    background: $orange-light;
+  }
+  
+  progress::-webkit-progress-value {
+    background: $orange-light;
+  }
+  
+  progress::-webkit-progress-bar {
+    background: $orange-light;
+  }
+}
+
+#cpu_progress_container {
+  progress::-moz-progress-bar {
+    color: $green-light;
+  }
+  
+  progress {
+    border: none;
+    background: $beige-darker;
+    color: $green-light;
+  }
+  
+  progress::-webkit-progress-value {
+    background: $green-light;
+  }
+  
+  progress::-moz-progress-bar {
+    background: $green-light;
+  }
+  
+  progress::-webkit-progress-value {
+    background: $green-light;
+  }
+  
+  progress::-webkit-progress-bar {
+    background: $green-light;
+  }
+}
+
+#detailed-system-info > .date-time {
+  width: 50%;
+  padding: 10px;
+  float: right;
 }

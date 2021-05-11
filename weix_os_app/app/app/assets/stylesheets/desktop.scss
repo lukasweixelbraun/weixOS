@@ -1,5 +1,9 @@
 @import "variables";
 
+.hidden {
+  display: none;
+}
+
 #desktop {
   background: asset_url("background.img") no-repeat center center fixed; 
   -webkit-background-size: cover;

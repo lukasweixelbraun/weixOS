@@ -2,22 +2,37 @@ module SystemInfoHelper
 
   def self.cpu_usage
     file = File.join(Rails.root, 'system_info', 'cpu.txt')
-    File.read(file)
+    cpu = File.read(file)
+    result = cpu.gsub(/(?!([0-9]|\.))./, '').squish
+    result
   end
 
   def self.memory_usage
     file = File.join(Rails.root, 'system_info', 'memory.txt')
-    File.read(file)
+    memory_usage = File.read(file)
+    result = memory_usage.gsub(/(?!([0-9]))./, '').squish
+    result
+  end
+
+  def self.swap_usage
+    file = File.join(Rails.root, 'system_info', 'swap.txt')
+    memory_usage = File.read(file)
+    result = memory_usage.gsub(/(?!([0-9]))./, '').squish
+    result
   end
 
   def self.temperature
     file = File.join(Rails.root, 'system_info', 'temp.txt')
-    File.read(file)
+    temperature = File.read(file)
+    result = temperature.gsub(/(?!([0-9]|\.))./, '').squish
+    result
   end
 
   def self.upgradables
     file = File.join(Rails.root, 'system_info', 'upgradable.txt')
-    File.read(file)
+    upgradables = File.read(file)
+    result = upgradables.gsub(/(?!([0-9]))./, '').squish
+    result
   end
   
 end

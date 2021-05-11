@@ -40,6 +40,34 @@
       <span id="system-time" class="time"></span>
     </div>
 
+    <div id="detailed-system-info" class="hidden">
+      <div class="hardware-monitor">
+        <div id="temp_progress_container" class="hardware-entry">
+          <h4>Temperature</h4>
+          <progress id="temp_progress" value=0 max=100>-</progress>
+        </div>
+        
+        <div id="memory_progress_container" class="hardware-entry">
+          <h4>Memory usage</h4>
+          <progress id="memory_progress" value=0 max=100>-</progress>
+        </div>
+
+        <div id="swap_progress_container" class="hardware-entry">
+          <h4>Swap usage</h4>
+          <progress id="swap_progress" value=0 max=100>-</progress>
+        </div>
+
+        <div id="cpu_progress_container" class="hardware-entry">
+          <h4>CPU usage</h4>
+          <progress id="cpu_progress" value=0 max=100>-</progress>
+        </div>
+      </div>
+
+      <div class="date-time">
+
+      </div>
+    </div>
+
     <span class="vr"></span>
 
     <div class="element">
