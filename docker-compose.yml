@@ -3,6 +3,7 @@ version: '3'
 services:
   postgres:
     image: postgres:12
+    restart: always
     ports:
       - "5432:5432"
     volumes:
@@ -15,6 +16,7 @@ services:
   weix_os:
     build: ./weix_os_app
     image: weix_os
+    restart: always
     ports:
       - "3000:3000"
     volumes:
