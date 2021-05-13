@@ -1,0 +1,60 @@
+@import "variables";
+
+.file-window {
+  height: 100%;
+}
+
+.file-toolbar {
+  height: 40px;
+  width: 100%;
+  background-color: $beige-black;
+  color: $beige-light;
+}
+
+.favorite-files {
+  float: left;
+  width: 220px;
+  height: calc(100% - 40px);
+  background-color: $beige-dark;
+  color: $beige-light;
+
+  table {
+    background-color: $beige-dark;
+    color: $beige-light !important;
+  }
+}
+
+.file-table {
+  float: left;
+  height: calc(100% - 40px);
+  width: calc(100% - 220px);
+  overflow-y: scroll;
+  background-color: $beige-darker;
+  color: $beige-light;
+
+  table {
+    background-color: $beige-darker;
+    color: $beige-light !important;
+  }
+}
+
+.file-upload {
+  width: 100%;
+  float: left;
+  height: 10%;
+  padding-top: 15px;
+}
+
+.light-icon {
+  color: $beige-light;
+  line-height: 24px;
+  font-size: 24px;
+}
+
+.fav-entry {
+  cursor: pointer;
+}
+
+.file-entry {
+  cursor: pointer;
+}

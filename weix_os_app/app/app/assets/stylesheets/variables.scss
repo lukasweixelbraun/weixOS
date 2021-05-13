@@ -1,9 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
 
 
-
-
-
 // -----------  colors  -----------
 
 // Global colors
@@ -38,7 +35,13 @@ $input-shadow: none;
 
 
 
-
+// -----------  table  -----------
+$table-color: $beige-light;
+$table-background-color: $beige-darker;
+$table-cell-border: $beige-black;
+$table-row-hover-background-color: $beige-black;
+$table-row-active-background-color: $red;
+$table-head-cell-color: $beige-light;
 
 
 // -----------  sizes  -----------
@@ -49,16 +52,12 @@ $system-menu-height: 800px;
 
 
 
-
-
-
 // -----------  z-index  -----------
 $system-message-z-index: 50;
 $system-message-container-z-index: 40; 
 $context-menu-z-index: 30;
 $system-toolbar-z-index: 20;
 $app-window-z-index: 10;
-
 
 
 
