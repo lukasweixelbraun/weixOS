@@ -14,6 +14,27 @@ export class File {
     this.type = type;
   }
 
+  public chdir() {
+    console.log("HALLO");
+
+    $.ajax({
+      global: false,
+      type: "POST",
+      url: "/file_system/chdir",
+      data: {
+        path: this.path
+      },
+      dataType: 'html',
+      success: function(html) {
+        console.log("HALLO");
+        console.log(html);
+        var file_table = document.getElementById('system-files');
+
+        file_table.innerHTML = html;
+      }
+    });
+  }
+
   public download() {
     $.ajax({
       global: false,

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   post 'file_system/upload' => 'file_system#upload', as: :upload
   post 'file_system/download' => 'file_system#download', as: :download
+  post 'file_system/chdir' => 'file_system#chdir', as: :chdir
 
   namespace :my_apps do
     # app

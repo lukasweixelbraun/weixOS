@@ -18,6 +18,8 @@
   background-color: $beige-dark;
   color: $beige-light;
 
+  border-bottom-left-radius: 3px;
+
   table {
     background-color: $beige-dark;
     color: $beige-light !important;
@@ -32,10 +34,36 @@
   background-color: $beige-darker;
   color: $beige-light;
 
+  border-bottom-right-radius: 3px;
+
   table {
     background-color: $beige-darker;
     color: $beige-light !important;
   }
+}
+
+.file-form {
+  width: 52px !important;
+  float: right;
+}
+
+.file-icon {
+  margin-right: 0px !important;
+}
+
+.file-label .file-cta {
+  background-color: $beige-black !important;
+  color: $beige-lighter !important;
+}
+
+.file-label:hover .file-cta {
+  background-color: $beige-darker !important;
+  color: $beige-light !important;
+}
+
+.file-cta, .file-name {
+  border-radius: 0px !important;
+  border: none !important;
 }
 
 .file-upload {
@@ -48,7 +76,7 @@
 .light-icon {
   color: $beige-light;
   line-height: 24px;
-  font-size: 24px;
+  font-size: 18px;
 }
 
 .fav-entry {

@@ -1,0 +1,24 @@
+<table class="table is-fullwidth is-hoverable">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Größe</th>
+      <th>Geändert</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% Dir.glob(File.join(Dir.pwd, '*')).each do |file| %>
+      <tr class="file-entry" data-file-path="<%= file.remove(Rails.root.join('data').to_s) %>" data-file-type="<%= File.file?(file) ? "file" : "dir"%>" >
+        <th>
+          <span class="light-icon">
+            <i class="fas <%= File.file?(file) ? "fa-file" : "fa-folder"%>"></i>
+          </span>
+        </th>
+        <td><%= File.basename(file) %></td>
+        <td><%= number_to_human_size(File.size(file)) %></td>
+        <td><%= File.mtime(file) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>  
