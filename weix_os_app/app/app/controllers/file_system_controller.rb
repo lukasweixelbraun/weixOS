@@ -13,21 +13,30 @@ class FileSystemController < ActionController::Base
     return render partial: '/my_apps/file_tree'
   end
 
-  def chdir
-    current_dir = Dir.pwd
-    Dir.chdir(current_dir + params['path'])
+  def download
+    send_file(
+      File.join(Dir.pwd, params['name']),
+      filename: params['name'],
+      type: "application/text"
+    )
+  end
+
+  def create_dir
+    new_dir = File.join(Dir.pwd, params['name'])
+    Dir.mkdir(new_dir)
 
     return render partial: '/my_apps/file_tree'
   end
 
-  def download
-    Rails.logger.info("#{Rails.root.join('data').to_s + params['path']}")
+  def chdir
+    user_dir = Rails.root.join('data', current_user.firstname)
+    Dir.chdir(File.join(user_dir, params['path']))
 
-    send_file(
-      "#{Rails.root.join('data').to_s + params['path']}",
-      filename: File.basename(params['path']),
-      type: "application/text"
-    )
+    return render partial: '/my_apps/file_tree'
+  end
+
+  def update_nav
+    return render partial: '/my_apps/file_navigation', locals: {current_dir: Dir.pwd}
   end
 
 end

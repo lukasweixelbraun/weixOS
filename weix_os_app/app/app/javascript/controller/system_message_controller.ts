@@ -15,17 +15,16 @@ export class SystemMessage {
 
 var systemMessages : SystemMessage[] = [];
 
-// add all system messages:
-
-systemMessages.push(new SystemMessage('testmessage', 'TEST', 'Das ist eine Test Nachricht an dich!', 'default'));
-
-
-
-
-
-
-
-
 export function getSystemMessages(name) {
   return systemMessages.find((s : SystemMessage) => s.name == name);
 }
+
+
+
+// add all system messages:
+
+//test
+systemMessages.push(new SystemMessage('testmessage', 'TEST', 'Das ist eine Test Nachricht an dich!', 'default'));
+
+//mkdir Error
+systemMessages.push(new SystemMessage('mkdir_error', 'Fehler', 'Beim erstellen des Verzeichnisses ist ein Fehler aufgetreten!', 'error'));

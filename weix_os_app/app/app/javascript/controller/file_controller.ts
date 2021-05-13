@@ -6,18 +6,18 @@ $.ajaxSetup({
 
 export class File {
 
+  private name : string;
   private path : string;
-  private type? : string;
+  private type : string;
 
-  constructor(path : string, type? : string) {
+  constructor(name : string, path : string, type : string) {
+    this.name = name;
     this.path = path;
     this.type = type;
   }
 
-  public chdir() {
-    console.log("HALLO");
-
-    $.ajax({
+  public async chdir() {
+    await $.ajax({
       global: false,
       type: "POST",
       url: "/file_system/chdir",
@@ -26,11 +26,23 @@ export class File {
       },
       dataType: 'html',
       success: function(html) {
-        console.log("HALLO");
-        console.log(html);
         var file_table = document.getElementById('system-files');
-
         file_table.innerHTML = html;
+      }
+    });
+
+    this.updateNavBar();
+  }
+
+  public updateNavBar() {
+    $.ajax({
+      global: false,
+      type: "POST",
+      url: "/file_system/update_nav",
+      dataType: 'html',
+      success: function(html) {
+        var file_nav = document.getElementById('file-navigation-container');
+        file_nav.innerHTML = html;
       }
     });
   }
@@ -41,7 +53,7 @@ export class File {
       type: "POST",
       url: "/file_system/download",
       data: {
-        path: this.path
+        name: this.name
       },
       xhrFields: {
         responseType: 'blob' // to avoid binary data being mangled on charset conversion

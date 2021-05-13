@@ -1,0 +1,14 @@
+<% root_dir = Rails.root.join('data').to_s %>
+<% dirs = current_dir.remove(root_dir).split('/') %>
+
+<nav class="breadcrumb is-left" aria-label="breadcrumbs">
+  <ul id="file-navigation">
+    <% path = '' %>
+    <% dirs.each do |dir| %>
+      <% path = File.join(path, dir).to_s %>
+      <li>
+        <a class="file-nav-element" data-file-path="<%= path.remove("#{current_user.firstname}") %>"><%= dir %></a>
+      </li>
+    <% end %>
+  </ul>
+</nav>

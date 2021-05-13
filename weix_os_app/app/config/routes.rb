@@ -10,10 +10,13 @@ Rails.application.routes.draw do
   post 'system/create_message' => 'system#create_message', as: :create_message
   post 'system/load_apps' => 'system#load_apps', as: :load_apps
 
+  
   post 'file_system/upload' => 'file_system#upload', as: :upload
   post 'file_system/download' => 'file_system#download', as: :download
   post 'file_system/chdir' => 'file_system#chdir', as: :chdir
-
+  post 'file_system/create_dir' => 'file_system#create_dir', as: :create_dir
+  post 'file_system/update_nav' => 'file_system#update_nav', as: :update_nav
+  
   namespace :my_apps do
     # app
     post 'update_pos' => 'app#update_pos', as: :update_pos

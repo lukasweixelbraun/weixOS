@@ -1,10 +1,15 @@
 import { File } from "../controller/file_controller"
+import { Desktop } from "../controller/desktop_controller"
+import { getSystemMessages } from "../controller/system_message_controller"
 
+const desktop : Desktop = Desktop.getInstance();
+
+// download or chdir
 $(document).on("dblclick", '.file-entry', function(event) {
   event.stopPropagation();
   var element = event.target.closest('tr');
-  const { filePath, fileType } = element.dataset;
-  var file = new File(filePath, fileType);
+  const { fileName, filePath, fileType } = element.dataset;
+  var file = new File(fileName, filePath, fileType);
 
   if(fileType == 'dir') {
     file.chdir();
@@ -14,6 +19,81 @@ $(document).on("dblclick", '.file-entry', function(event) {
   
 });
 
+
+//file navigation
+$(document).on("click", '.file-nav-element', function(event) {
+  event.stopPropagation();
+  var element = event.target.closest('a');
+  const { fileName, filePath, fileType } = element.dataset;
+  var file = new File('', filePath, '');
+  file.chdir();
+});
+
+
+// create dir
+$(document).on("click", '#add-folder', function(event) {
+  event.stopPropagation();
+  var add_dir_prompt = document.getElementById('add-folder-container');
+
+  add_dir_prompt.classList.toggle('hidden');
+
+  if(!add_dir_prompt.classList.contains('hidden')) {
+    var input = document.getElementById('dir_name') as HTMLInputElement;
+    input.focus();
+    input.select();
+  }
+});
+
+$(document).on("click", '.add-folder-form', function(event) {
+  event.stopPropagation();
+});
+
+$(document).on("click", '.file-window', function(event) {
+  var add_dir_prompt = document.getElementById('add-folder-container');
+
+  if(!add_dir_prompt.classList.contains('hidden')) {
+    add_dir_prompt.classList.add('hidden');
+  }
+});
+
+$(document).on("click", '#dir-add', async function(event) {
+  event.preventDefault();
+
+  var input = document.getElementById('dir_name') as HTMLInputElement;
+  var error = false;
+
+  await $.ajax({
+    global: false,
+    type: "POST",
+    url: "/file_system/create_dir",
+    data: {
+      name: input.value
+    },
+    dataType: 'html',
+    success: function(html) {
+      var file_table = document.getElementById('system-files');
+      file_table.innerHTML = html;
+    },
+    error: function(e) {
+      error = true;
+      desktop.createSystemMessage(getSystemMessages("mkdir_error"));
+    }
+  });
+
+  if(error === false) {
+    var add_dir_prompt = document.getElementById('add-folder-container');
+
+    if(!add_dir_prompt.classList.contains('hidden')) {
+      add_dir_prompt.classList.add('hidden');
+    }
+
+    input.value = "Neuer Ordner";
+  }
+
+  return false;
+});
+
+// context menue
 $(document).on("contextmenu", '.file-entry', function(event) {
   event.stopPropagation();
   var element = event.target.closest('tr');
@@ -22,6 +102,7 @@ $(document).on("contextmenu", '.file-entry', function(event) {
   //TODO Open Context Menu
 });
 
+// upload
 $(document).on("change", '.file-input', function(event) {
   event.preventDefault();
 

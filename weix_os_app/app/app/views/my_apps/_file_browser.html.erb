@@ -1,8 +1,34 @@
-<% Dir.chdir(Rails.root.join('data')) %>
+<% user_dir = Rails.root.join('data', current_user.firstname) %>
+<% Dir.mkdir(user_dir) unless Dir.exist?(user_dir) %>
+<% Dir.chdir(user_dir) %>
 
 <div class="file-window">
 
   <div class="file-toolbar">
+
+    <div id="file-navigation-container" class="navigation-bar">
+      <%= render partial: 'my_apps/file_navigation', locals: { current_dir: user_dir.to_s } %> 
+    </div>
+
+    <div class="folder-form">
+      <label class="file-label">
+        <button id="add-folder" class="file-input"></button>
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fas fa-folder-plus"></i>
+          </span>
+        </span>
+      </label>
+    </div>
+
+    <div id="add-folder-container" class="add-folder-form hidden">
+      <form class="add-dir-form" action="/file_system/create_dir">
+        <label for="dir_name">Directory name:</label><br>
+        <input type="text" id="dir_name" class="input dir-name" name="dir_name" value="Neuer Ordner" placeholder="Neuer Ordner">
+        <input id="dir-add" class="button is-dark" type="submit" value="+">
+      </form> 
+    </div>
+
     <%= form_with url: "/file_system/upload", multipart: true, class: "file-form", method: :post do |f| %>
       <div>
         <label class="file-label">
@@ -44,9 +70,7 @@
   </div>
 
   <div id="system-files" class="file-table">
-
-    <%= render partial: 'my_apps/file_tree'%> 
-  
+    <%= render partial: 'my_apps/file_tree'%>
   </div>
 
 </div>
