@@ -36,6 +36,10 @@ system_data/*
 !/weix_os_app/app/storage/.keep
 /weix_os_app/app.byebug_history
 
+# Ignore uploaded files.
+/weix_os_app/app/data/*
+!/weix_os_app/app/data/.keep
+
 # Ignore master key for decrypting credentials and more.
 /weix_os_app/app/config/master.key
 

@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   post 'system/create_message' => 'system#create_message', as: :create_message
   post 'system/load_apps' => 'system#load_apps', as: :load_apps
 
+  post 'file_system/upload' => 'file_system#upload', as: :upload
+  post 'file_system/download' => 'file_system#download', as: :download
+
   namespace :my_apps do
     # app
     post 'update_pos' => 'app#update_pos', as: :update_pos

@@ -287,115 +287,67 @@
   width: 100%;
 }
 
+progress[value] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  
+  border: none;
+
+  background-color: $beige-darker;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: $beige-darker;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
 #temp_progress_container {
-  progress::-moz-progress-bar {
-    color: $yellow;
-  }
   
-  progress {
-    border: none;
-    background: $beige-darker;
-    color: $yellow;
+  progress[value]::-moz-progress-bar {
+    background-color: $yellow;
+    border-radius: 2px;
   }
-  
-  progress::-webkit-progress-value {
-    background: $yellow;
-  }
-  
-  progress::-moz-progress-bar {
-    background: $yellow;
-  }
-  
-  progress::-webkit-progress-value {
-    background: $yellow;
-  }
-  
-  progress::-webkit-progress-bar {
+
+  progress[value]::-webkit-progress-value {
     background: $yellow;
   }
 }
 
 #memory_progress_container {
-  progress::-moz-progress-bar {
+
+  progress[value]::-moz-progress-bar {
+    background-color: $red;
+    border-radius: 2px;
+  }
+
+  progress[value]::-webkit-progress-bar {
     color: $red;
-  }
-  
-  progress {
-    border: none;
-    background: $beige-darker;
-    color: $red;
-  }
-  
-  progress::-webkit-progress-value {
-    background: $red;
-  }
-  
-  progress::-moz-progress-bar {
-    background: $red;
-  }
-  
-  progress::-webkit-progress-value {
-    background: $red;
-  }
-  
-  progress::-webkit-progress-bar {
-    background: $red;
   }
 }
 
 #swap_progress_container {
-  progress::-moz-progress-bar {
+
+  progress[value]::-moz-progress-bar {
+    background-color: $orange-light;
+    border-radius: 2px;
+  }
+  
+  progress[value]::-webkit-progress-bar {
     color: $orange-light;
-  }
-  
-  progress {
-    border: none;
-    background: $beige-darker;
-    color: $orange-light;
-  }
-  
-  progress::-webkit-progress-value {
-    background: $orange-light;
-  }
-  
-  progress::-moz-progress-bar {
-    background: $orange-light;
-  }
-  
-  progress::-webkit-progress-value {
-    background: $orange-light;
-  }
-  
-  progress::-webkit-progress-bar {
-    background: $orange-light;
   }
 }
 
 #cpu_progress_container {
-  progress::-moz-progress-bar {
+
+  progress[value]::-moz-progress-bar {
+    background-color: $green-light;
+    border-radius: 2px;
+  }
+  
+  progress[value]::-webkit-progress-bar {
     color: $green-light;
-  }
-  
-  progress {
-    border: none;
-    background: $beige-darker;
-    color: $green-light;
-  }
-  
-  progress::-webkit-progress-value {
-    background: $green-light;
-  }
-  
-  progress::-moz-progress-bar {
-    background: $green-light;
-  }
-  
-  progress::-webkit-progress-value {
-    background: $green-light;
-  }
-  
-  progress::-webkit-progress-bar {
-    background: $green-light;
   }
 }
 

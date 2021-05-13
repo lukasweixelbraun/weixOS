@@ -1,21 +1,73 @@
-<div>
-  <h1 class="title">File Browser</h1>
+<div class="file-window">
 
+  <div class="file-toolbar">
+    <form action="file_system/upload" method="post" enctype="multipart/form-data">
+      <div>
+        <label class="file-label">
+          <input class="file-input" type="file" name="datei[]" multiple>
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-cloud-upload-alt"></i>
+            </span>
+          </span>
+        </label>
+      </div>
+    </form>
+  </div>
+
+  <div class="favorite-files">
+
+    <table class="table is-fullwidth is-hoverable">
+      </thead>
+      <tbody>
+        <tr class="fav-entry">
+          <th>
+            <span class="light-icon">
+              <i class="fas fa-bookmark"></i>
+            </span>
+          </th>
+          <td>Root</td>
+        </tr>
+        <tr class="fav-entry">
+          <th>
+            <span class="light-icon">
+              <i class="fas fa-home"></i>
+            </span>
+          </th>
+          <td>Home</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div class="file-table">
+
+    <table class="table is-fullwidth is-hoverable">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Größe</th>
+          <th>Geändert</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% Dir.glob(Rails.root.join('data', '*')).each do |file| %>
+          <tr class="file-entry" data-file-path="<%= file.remove(Rails.root.join('data').to_s) %>">
+            <th>
+              <span class="light-icon">
+                <i class="fas <%= File.file?(file) ? "fa-file" : "fa-folder"%>"></i>
+              </span>
+            </th>
+            <td><%= File.basename(file) %></td>
+            <td><%= number_to_human_size(File.size(file)) %></td>
+            <td><%= File.mtime(file) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>   
   
+  </div>
 
-  <form action="manage_uploads.php" method="post" enctype="multipart/form-data">
-    <div class="file">
-      <label class="file-label">
-        <input class="file-input" type="file" name="datei[]" multiple>
-        <span class="file-cta">
-          <span class="file-icon">
-            <i class="fas fa-cloud-upload-alt"></i>
-          </span>
-          <span class="file-label">
-            Choose a file…
-          </span>
-        </span>
-      </label>
-    </div>
-  </form>
 </div>

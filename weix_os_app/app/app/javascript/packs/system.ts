@@ -19,13 +19,13 @@ window.addEventListener('contextmenu', function(e) {
 }, false);
 
 document.addEventListener('click', function(e) {
-  e.preventDefault();
+  //e.preventDefault();
   desktop.closeContextMenus();
   toolbar.cloesDetailedSystemInfo();
 }, false);
 
 window.addEventListener('click', function(e) {
-  e.preventDefault();
+  //e.preventDefault();
   desktop.closeContextMenus();
   toolbar.cloesDetailedSystemInfo();
 }, false);

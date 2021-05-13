@@ -52,8 +52,7 @@
 }
 
 .window.app-window > .app-body {
-  padding: 35px;
-  height: 100%;
+  height: calc(100% - 25px);
   width: 100%;
 }
 
