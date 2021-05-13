@@ -46,6 +46,9 @@ group :development do
   gem 'spring'
 end
 
+gem 'rubyzip', '>= 1.0.0' # will load new rubyzip version
+gem 'zip-zip' # will load compatibility for old rubyzip API.
+
 gem "bulma-rails", "~> 0.9.1"
 
 gem 'devise'

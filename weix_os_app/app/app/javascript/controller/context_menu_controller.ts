@@ -2,9 +2,7 @@ export enum ContextMenuFunctions {
   addToDesktop,
   removeFromDesktop,
   addToFavorites,
-  removeFromFavorites,
-  openFileTableOptions,
-  openFileOptions
+  removeFromFavorites
 }
 
 export class ContextMenu {

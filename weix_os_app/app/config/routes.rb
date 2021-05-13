@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   post 'file_system/chdir' => 'file_system#chdir', as: :chdir
   post 'file_system/create_dir' => 'file_system#create_dir', as: :create_dir
   post 'file_system/update_nav' => 'file_system#update_nav', as: :update_nav
+  post 'file_system/open_context_menu' => 'file_system#open_context_menu', as: :open_context_menu
+  delete 'file_system/delete' => 'file_system#delete', as: :delete
   
   namespace :my_apps do
     # app

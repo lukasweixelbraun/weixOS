@@ -35,6 +35,10 @@ window.addEventListener("load", (event) => {
   desktop.loadApps(event);
 });
 
+$(document).on("contextmenu", '.menu', function(event) {
+  event.stopPropagation();
+});
+
 $(document).on("click", '.app-search-result', function(event) {
   event.stopPropagation();
   var element = event.target.closest('button');

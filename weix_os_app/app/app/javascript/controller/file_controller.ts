@@ -34,6 +34,21 @@ export class File {
     this.updateNavBar();
   }
 
+  public delete() {
+    $.ajax({
+      global: false,
+      type: "DELETE",
+      url: "/file_system/delete",
+      data: {
+        name: this.name
+      },
+      success: function (html) {
+        var file_table = document.getElementById('system-files');
+        file_table.innerHTML = html;
+      }
+    });
+  }
+
   public updateNavBar() {
     $.ajax({
       global: false,
@@ -45,6 +60,50 @@ export class File {
         file_nav.innerHTML = html;
       }
     });
+  }
+
+  public openContextMenu(event, contextTemplate : string) {
+    event.preventDefault();
+    this.closeContextMenus();
+
+    var desktop = document.getElementById('desktop');
+    var x = event.clientX;
+    var y = event.clientY;
+
+    $.ajax({
+      global: false,
+      type: "POST",
+      url: "/file_system/open_context_menu",
+      dataType: 'html',
+      data: {
+        name: this.name,
+        path: this.path,
+        template: contextTemplate
+      },
+      success: function (html) {
+        
+        var menu = document.createElement('div');
+        menu.classList.add('context-menu');
+        menu.innerHTML = html;
+
+        desktop.appendChild(menu);
+
+        if(y + menu.offsetHeight > window.innerHeight) {
+          y = window.innerHeight - menu.offsetHeight - 10;
+        }
+      
+        if(x + menu.offsetWidth > window.innerWidth) {
+          x = window.innerWidth - menu.offsetWidth - 10;
+        }
+
+        menu.style.left = x + "px";
+        menu.style.top = y + "px";
+      }
+    });
+  }
+
+  public closeContextMenus() {
+    document.querySelectorAll('.context-menu').forEach(e => e.remove());
   }
 
   public download() {

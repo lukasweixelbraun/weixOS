@@ -1,6 +1,7 @@
 import { File } from "../controller/file_controller"
 import { Desktop } from "../controller/desktop_controller"
 import { getSystemMessages } from "../controller/system_message_controller"
+import { ContextMenuFunctions } from "../controller/context_menu_controller";
 
 const desktop : Desktop = Desktop.getInstance();
 
@@ -97,9 +98,24 @@ $(document).on("click", '#dir-add', async function(event) {
 $(document).on("contextmenu", '.file-entry', function(event) {
   event.stopPropagation();
   var element = event.target.closest('tr');
-  const { filePath } = element.dataset;
-  console.log(filePath);
-  //TODO Open Context Menu
+  const { fileName, filePath, fileType } = element.dataset;
+  var file = new File(fileName, filePath, fileType);
+  
+  file.openContextMenu(event, fileType);
+});
+
+$(document).on("click", '.context-menue-item', function(event) {
+  event.stopPropagation();
+  var element = event.target.closest('button');
+  const { fileName, filePath, fileAction } = element.dataset;
+
+  var file = new File(fileName, filePath, '');
+
+  if(fileAction == 'download') {
+    file.download();
+  } else if(fileAction == 'delete') {
+    file.delete();
+  }
 });
 
 // upload
