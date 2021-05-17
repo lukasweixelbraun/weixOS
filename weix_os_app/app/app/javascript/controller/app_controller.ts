@@ -72,9 +72,13 @@ export class App {
     if(this.window.isOpen() == true) {
       return;
     }
+
+    Desktop.getInstance().showLoading();
     
     this.window.open(event);
     this.addToToolbar();
+
+    Desktop.getInstance().stopLoading();
   }
 
   public getElement() {

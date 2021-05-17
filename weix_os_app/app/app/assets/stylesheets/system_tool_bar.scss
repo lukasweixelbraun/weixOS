@@ -130,11 +130,12 @@
 }
 
 .system-tool-bar > .system-menu > .menu-box > .menu-right > .current-user {
-  height: calc(100% - 42px - 5px);
+  height: calc(100% - 42px - 25px);
   width: 100%;
 }
 
 .system-tool-bar > .system-menu > .menu-box > .menu-right > .current-user > .image {
+  margin: 20px 0px;
   transform: translateX(-50%);
   left: 50%;
 }
@@ -154,9 +155,6 @@
 .system-tool-bar > .system-menu > .menu-box > .menu-right > button:hover {
   background-color: $beige-black;
 }
-
-
-
 
 .system-pinned-applications {
   border: 1px solid $beige-pitch-black;
@@ -286,6 +284,8 @@
 .hardware-monitor > .hardware-entry > progress {
   width: 100%;
 }
+
+// --------------  Progress Bars --------------
 
 progress[value] {
   -webkit-appearance: none;

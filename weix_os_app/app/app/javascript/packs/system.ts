@@ -45,6 +45,7 @@ $(document).on("click", '.app-search-result', function(event) {
   const { appId } = element.dataset;
   var app = Desktop.getInstance().getApp(appId);
   app.openWindow(event);
+  toolbar.closeSystemMenu();
 });
 
 $(document).on("contextmenu", '.app-search-result', function(event) {
