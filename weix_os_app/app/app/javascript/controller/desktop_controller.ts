@@ -52,22 +52,20 @@ export class Desktop {
 
             var window : AppWindow = null;
 
-            if(user_settings != undefined) {
-              var opened : boolean = user_settings.is_opened;
-
-              if(opened == true) {
-                window = new AppWindow(app_data.id,
-                  app_data.template_name, 
-                  user_settings.window_pos_x,
-                  user_settings.window_pos_y,
-                  user_settings.last_state,
-                  opened,
-                  app.getCloseWindowCallback()
-                );
-              }
+            // Wenn die App noch offen ist, wird das Fenster erzeugt und auf open = false gesetzt, dass app.openWindow() nicht returnt
+            if(user_settings != undefined && user_settings.is_opened) {
+              window = new AppWindow(app_data.id,
+                app_data.template_name, 
+                user_settings.window_pos_x,
+                user_settings.window_pos_y,
+                user_settings.last_state,
+                false,
+                app.getCloseWindowCallback()
+              );
             }
 
             if(window != null) {
+              app.setWindow(window);
               app.openWindow(event);
             } else if(app.hasToolbarLink() == true) {
               app.addToToolbar();
@@ -171,6 +169,14 @@ export class Desktop {
         document.getElementById('system-message-overlay').classList.toggle('hidden');
       }
     });
+  }
+
+  public showLoading() {
+    this.getElement().classList.add('loading');
+  }
+
+  public stopLoading() {
+    this.getElement().classList.remove('loading');
   }
 
   public dismissSystemMessage() {

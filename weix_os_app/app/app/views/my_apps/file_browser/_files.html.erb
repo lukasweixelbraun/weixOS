@@ -7,7 +7,7 @@
   <div class="file-toolbar">
 
     <div id="file-navigation-container" class="navigation-bar">
-      <%= render partial: 'my_apps/file_navigation', locals: { current_dir: user_dir.to_s } %> 
+      <%= render partial: 'my_apps/file_browser/file_navigation', locals: { current_dir: user_dir.to_s } %> 
     </div>
 
     <div class="folder-form">
@@ -70,7 +70,7 @@
   </div>
 
   <div id="system-files" class="file-table">
-    <%= render partial: 'my_apps/file_tree'%>
+    <%= render partial: 'my_apps/file_browser/file_tree'%>
   </div>
 
 </div>

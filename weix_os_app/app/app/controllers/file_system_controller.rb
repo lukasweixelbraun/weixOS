@@ -10,7 +10,7 @@ class FileSystemController < ActionController::Base
       end
     end
 
-    return render partial: '/my_apps/file_tree'
+    return render partial: '/my_apps/file_browser/file_tree'
   end
 
   def download
@@ -44,25 +44,25 @@ class FileSystemController < ActionController::Base
       FileUtils.rm_rf(file_to_delete)
     end
 
-    return render partial: '/my_apps/file_tree'
+    return render partial: '/my_apps/file_browser/file_tree'
   end
 
   def create_dir
     new_dir = File.join(Dir.pwd, params['name'])
     Dir.mkdir(new_dir)
 
-    return render partial: '/my_apps/file_tree'
+    return render partial: '/my_apps/file_browser/file_tree'
   end
 
   def chdir
     user_dir = Rails.root.join('data', current_user.firstname)
     Dir.chdir(File.join(user_dir, params['path']))
 
-    return render partial: '/my_apps/file_tree'
+    return render partial: '/my_apps/file_browser/file_tree'
   end
 
   def update_nav
-    return render partial: '/my_apps/file_navigation', locals: {current_dir: Dir.pwd}
+    return render partial: '/my_apps/file_browser/file_navigation', locals: {current_dir: Dir.pwd}
   end
 
   private 

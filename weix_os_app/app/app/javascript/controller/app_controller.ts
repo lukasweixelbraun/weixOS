@@ -65,13 +65,14 @@ export class App {
   }
 
   public openWindow(event) {
-    if(this.window != null && this.window != undefined) {
-      if(this.window.isOpen() == true) {
-        return;
-      }
+    if(this.window == null || this.window == undefined) {
+      this.window = new AppWindow(this.id, this.template_name, 50, 50, "", false, this.closeWindowCallback);
     }
 
-    this.window = new AppWindow(this.id, this.template_name, 50, 50, "", false, this.closeWindowCallback);
+    if(this.window.isOpen() == true) {
+      return;
+    }
+    
     this.window.open(event);
     this.addToToolbar();
   }

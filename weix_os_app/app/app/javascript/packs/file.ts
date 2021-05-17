@@ -60,6 +60,8 @@ $(document).on("click", '.file-window', function(event) {
 $(document).on("click", '#dir-add', async function(event) {
   event.preventDefault();
 
+  Desktop.getInstance().showLoading();
+
   var input = document.getElementById('dir_name') as HTMLInputElement;
   var error = false;
 
@@ -80,6 +82,8 @@ $(document).on("click", '#dir-add', async function(event) {
       desktop.createSystemMessage(getSystemMessages("mkdir_error"));
     }
   });
+
+  Desktop.getInstance().stopLoading();
 
   if(error === false) {
     var add_dir_prompt = document.getElementById('add-folder-container');
@@ -119,7 +123,8 @@ $(document).on("click", '.context-menue-item', function(event) {
 });
 
 // upload
-$(document).on("change", '.file-input', function(event) {
+$(document).on("change", '.file-input', async function(event) {
+  Desktop.getInstance().showLoading();
   event.preventDefault();
 
   var files = this.files;
@@ -129,7 +134,7 @@ $(document).on("change", '.file-input', function(event) {
     data.append("files[]", files[x]);
   }
 
-  $.ajax({
+  await $.ajax({
     global: false,
     type: "POST",
     processData: false,
@@ -142,6 +147,8 @@ $(document).on("change", '.file-input', function(event) {
       file_table.innerHTML = html;
     }
   });
+
+  Desktop.getInstance().stopLoading();
 
   return false;
 });

@@ -1,3 +1,5 @@
+import { Desktop } from "./desktop_controller"
+
 $.ajaxSetup({
   headers: {
     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
@@ -17,6 +19,8 @@ export class File {
   }
 
   public async chdir() {
+    Desktop.getInstance().showLoading();
+
     await $.ajax({
       global: false,
       type: "POST",
@@ -32,10 +36,14 @@ export class File {
     });
 
     this.updateNavBar();
+
+    Desktop.getInstance().stopLoading();
   }
 
-  public delete() {
-    $.ajax({
+  public async delete() {
+    Desktop.getInstance().showLoading();
+
+    await $.ajax({
       global: false,
       type: "DELETE",
       url: "/file_system/delete",
@@ -47,6 +55,8 @@ export class File {
         file_table.innerHTML = html;
       }
     });
+
+    Desktop.getInstance().stopLoading();
   }
 
   public updateNavBar() {
@@ -106,8 +116,10 @@ export class File {
     document.querySelectorAll('.context-menu').forEach(e => e.remove());
   }
 
-  public download() {
-    $.ajax({
+  public async download() {
+    Desktop.getInstance().showLoading();
+
+    await $.ajax({
       global: false,
       type: "POST",
       url: "/file_system/download",
@@ -154,5 +166,7 @@ export class File {
         }
       }
     });
+
+    Desktop.getInstance().stopLoading();
   }
 }
