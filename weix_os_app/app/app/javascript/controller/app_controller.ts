@@ -4,6 +4,11 @@ import { AppWindow } from "./window_controller"
 $.ajaxSetup({
   headers: {
     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  },
+  statusCode: {
+    500: function(err){
+      Desktop.getInstance().stopLoading();
+    }
   }
 });
 

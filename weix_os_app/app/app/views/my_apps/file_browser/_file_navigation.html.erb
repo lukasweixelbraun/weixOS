@@ -7,7 +7,7 @@
     <% dirs.each do |dir| %>
       <% path = File.join(path, dir).to_s %>
       <li>
-        <a class="file-nav-element" data-file-path="<%= path.remove("#{current_user.firstname}") %>"><%= dir %></a>
+        <a class="file-nav-element" data-file-path="<%= path.remove("#{current_user.username}") %>"><%= dir %></a>
       </li>
     <% end %>
   </ul>

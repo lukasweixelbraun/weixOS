@@ -20,7 +20,7 @@
           </figure>
 
           <div class="user-name">
-            User: <%= current_user.firstname %>
+            User: <%= current_user.username %>
           </div>
         </div>
 
@@ -44,22 +44,30 @@
       <div class="hardware-monitor">
         <div id="temp_progress_container" class="hardware-entry">
           <h4>Temperature</h4>
-          <progress id="temp_progress" value=0 max=100>-</progress>
+          <div id="temp_progress" class="progress" data-label>
+            <span id="temp_progress_value" class="value" style="width: 0%;"></span>
+          </div>
         </div>
         
         <div id="memory_progress_container" class="hardware-entry">
           <h4>Memory usage</h4>
-          <progress id="memory_progress" value=0 max=100>-</progress>
+          <div id="memory_progress" class="progress" data-label>
+            <span id="memory_progress_value" class="value" style="width: 0%;"></span>
+          </div>
         </div>
 
         <div id="swap_progress_container" class="hardware-entry">
           <h4>Swap usage</h4>
-          <progress id="swap_progress" value=0 max=100>-</progress>
+          <div id="swap_progress" class="progress" data-label>
+            <span id="swap_progress_value" class="value" style="width: 0%;"></span>
+          </div>
         </div>
 
         <div id="cpu_progress_container" class="hardware-entry">
           <h4>CPU usage</h4>
-          <progress id="cpu_progress" value=0 max=100>-</progress>
+          <div id="cpu_progress" class="progress" data-label>
+            <span id="cpu_progress_value" class="value" style="width: 0%;"></span>
+          </div>
         </div>
       </div>
 

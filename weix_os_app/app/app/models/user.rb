@@ -8,5 +8,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable, :recoverable, :rememberable and :omniauthable
   devise :database_authenticatable, :registerable, :validatable
 
+  attr_writer :login
+
+  def login
+    @login || self.username || self.email
+  end
   
 end

@@ -84,6 +84,10 @@ export class Desktop {
     // add drop event listener
     this.getElement().addEventListener('drop', (event : any) => {
       var app = this.getDragApp();
+      if(app === undefined) {
+        return;
+      }
+      
       app.move(event.clientX, event.clientY);
     }, false);
     
@@ -204,8 +208,6 @@ export class Desktop {
         template: contextTemplate
       },
       success: function (html) {
-        
-
         var menu = document.createElement('div');
         menu.classList.add('context-menu');
         menu.innerHTML = html;

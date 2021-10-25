@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_21_205130) do
+ActiveRecord::Schema.define(version: 2021_10_23_155952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,7 +41,9 @@ ActiveRecord::Schema.define(version: 2021_04_21_205130) do
     t.string "encrypted_password", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "username"
     t.index ["email"], name: "index_t_users_on_email", unique: true
+    t.index ["username"], name: "index_t_users_on_username", unique: true
   end
 
   add_foreign_key "t_app2users", "t_app", column: "app_id", name: "t_app2users_app_id_fkey"

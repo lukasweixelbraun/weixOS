@@ -1,4 +1,4 @@
-<% user_dir = Rails.root.join('data', current_user.firstname) %>
+<% user_dir = Rails.root.join('data', current_user.username) %>
 
 <table class="table is-fullwidth is-hoverable">
   <thead>
@@ -11,7 +11,7 @@
   </thead>
   <tbody>
     <% Dir.glob(File.join(Dir.pwd, '*')).each do |file| %>
-      <tr class="file-entry" data-file-name="<%= File.basename(file) %>" data-file-path="<%= file.remove(user_dir.to_s) %>" data-file-type="<%= File.file?(file) ? "file" : "dir"%>" >
+      <tr class="file-entry" data-file-name="<%= File.basename(file) %>" draggable="true" data-file-path="<%= file.remove(user_dir.to_s) %>" data-file-type="<%= File.file?(file) ? "file" : "dir"%>" >
         <th>
           <span class="light-icon">
             <i class="fas <%= File.file?(file) ? "fa-file" : "fa-folder"%>"></i>

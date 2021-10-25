@@ -3,6 +3,11 @@ import { Desktop } from "./desktop_controller"
 $.ajaxSetup({
   headers: {
     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  },
+  statusCode: {
+    500: function(err){
+      Desktop.getInstance().stopLoading();
+    }
   }
 });
 
@@ -16,6 +21,27 @@ export class File {
     this.name = name;
     this.path = path;
     this.type = type;
+  }
+
+  public async move(dir: File) {
+    Desktop.getInstance().showLoading();
+
+    await $.ajax({
+      global: false,
+      type: "POST",
+      url: "/file_system/move",
+      data: {
+        file_path: this.path,
+        dir_path: dir.path
+      },
+      dataType: 'html',
+      success: function(html) {
+        var file_table = document.getElementById('system-files');
+        file_table.innerHTML = html;
+      }
+    });
+
+    Desktop.getInstance().stopLoading();
   }
 
   public async chdir() {

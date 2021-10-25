@@ -1,4 +1,4 @@
-<% user_dir = Rails.root.join('data', current_user.firstname) %>
+<% user_dir = Rails.root.join('data', current_user.username) %>
 <% Dir.mkdir(user_dir) unless Dir.exist?(user_dir) %>
 <% Dir.chdir(user_dir) %>
 

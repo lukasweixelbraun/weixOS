@@ -161,7 +161,7 @@
   -moz-box-shadow: inset 0 0 3px $beige-pitch-black;
   -webkit-box-shadow: inset 0 0 3px $beige-pitch-black;
   box-shadow: inset 0 0 3px $beige-pitch-black;
-  min-width: 200px;
+  min-width: 300px;
   float: left;
   padding: 4px;
 }
@@ -287,67 +287,53 @@
 
 // --------------  Progress Bars --------------
 
-progress[value] {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  
-  border: none;
-
+.progress {
+  height: 1.5em;
+  width: 100%;
   background-color: $beige-darker;
+  position: relative;
 }
 
-progress[value]::-webkit-progress-bar {
-  background-color: $beige-darker;
-  border-radius: 2px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+.progress:before {
+  content: attr(data-label);
+  font-size: 0.8em;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.progress .value {
+  display: inline-block;
+  height: 100%;
 }
 
 #temp_progress_container {
   
-  progress[value]::-moz-progress-bar {
-    background-color: $yellow;
-    border-radius: 2px;
-  }
-
-  progress[value]::-webkit-progress-value {
+  .progress .value {
     background: $yellow;
   }
 }
 
 #memory_progress_container {
 
-  progress[value]::-moz-progress-bar {
-    background-color: $red;
-    border-radius: 2px;
-  }
-
-  progress[value]::-webkit-progress-value {
-    color: $red;
+  .progress .value {
+    background: $red;
   }
 }
 
 #swap_progress_container {
 
-  progress[value]::-moz-progress-bar {
-    background-color: $orange-light;
-    border-radius: 2px;
-  }
-  
-  progress[value]::-webkit-progress-value {
-    color: $orange-light;
+  .progress .value {
+    background: $orange-light;
   }
 }
 
 #cpu_progress_container {
 
-  progress[value]::-moz-progress-bar {
-    background-color: $green-light;
-    border-radius: 2px;
-  }
-  
-  progress[value]::-webkit-progress-value {
-    color: $green-light;
+  .progress .value {
+    background: $green-light;
   }
 }
 

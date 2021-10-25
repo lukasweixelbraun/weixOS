@@ -55,8 +55,17 @@ class FileSystemController < ActionController::Base
   end
 
   def chdir
-    user_dir = Rails.root.join('data', current_user.firstname)
+    user_dir = Rails.root.join('data', current_user.username)
     Dir.chdir(File.join(user_dir, params['path']))
+
+    return render partial: '/my_apps/file_browser/file_tree'
+  end
+
+  def move
+    user_dir = Rails.root.join('data', current_user.username)
+    file = File.join(user_dir, params['file_path'])
+    dir = File.join(user_dir, params['dir_path'])
+    FileUtils.mv(file, dir)
 
     return render partial: '/my_apps/file_browser/file_tree'
   end

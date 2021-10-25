@@ -64,6 +64,11 @@ export class Toolbar {
     var memory_element_prog = document.getElementById('memory_progress') as HTMLProgressElement;
     var swap_element_prog = document.getElementById('swap_progress') as HTMLProgressElement;
 
+    var cpu_element_prog_val = document.getElementById('cpu_progress_value') as HTMLProgressElement;
+    var temp_element_prog_val = document.getElementById('temp_progress_value') as HTMLProgressElement;
+    var memory_element_prog_val = document.getElementById('memory_progress_value') as HTMLProgressElement;
+    var swap_element_prog_val = document.getElementById('swap_progress_value') as HTMLProgressElement;
+
     var cpu;
     var temp;
     var memory;
@@ -86,20 +91,20 @@ export class Toolbar {
 
     if(cpu != undefined && cpu != null) {
       cpu_element.title = 'System CPU: ' + cpu + ' %';
-      cpu_element_prog.value = cpu;
-      cpu_element_prog.innerHTML = cpu + ' %';
+      cpu_element_prog_val.style.width = cpu + '%';
+      cpu_element_prog.dataset['label'] = cpu + ' %';
     }
     if(temp != undefined && temp != null) {
       temp_element.title = 'Temperature: ' + temp + ' C';
-      temp_element_prog.value = temp;
-      temp_element_prog.innerHTML = temp + ' C';
+      temp_element_prog_val.style.width = temp + '%';
+      temp_element_prog.dataset['label'] = temp + ' C';
     }
     if (memory != undefined && memory != null && swap != undefined && swap != null) {
       memory_element.title = 'Memory usage: ' + memory + ' %  Swap usage: ' + swap + ' %';
-      memory_element_prog.value = memory;
-      memory_element_prog.innerHTML = memory + ' %';
-      swap_element_prog.value = swap;
-      swap_element_prog.innerHTML = swap + ' %';
+      memory_element_prog_val.style.width = memory + '%';
+      memory_element_prog.dataset['label'] = memory + ' %';
+      swap_element_prog_val.style.width = swap + '%';
+      swap_element_prog.dataset['label'] = swap + ' %';
     }
     if(upgradable != undefined && upgradable != null) {
       upgradable_element.title = 'Upgradable Packages: ' + upgradable + '';
